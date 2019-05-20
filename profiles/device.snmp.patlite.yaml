@@ -1,0 +1,310 @@
+name: "patlite"
+manufacturer: "Patlite Corp"
+model: "NHL-FB2"
+labels:
+  - "patlite"
+  - "signal tower"
+description: "Patlite Signal Tower accessed via SNMP"
+deviceResources:
+  -
+    name: RedLightControlState
+    description: "Red light state."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.2.1", community: "private"  }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+
+  -
+    name: AmberLightControlState
+    description: "Amber light state."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.2.2" , community: "private" }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+  -
+    name: GreenLightControlState
+    description: "Green light state."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.2.3" , community: "private" }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+  -
+    name: BuzzerControlState
+    description: "Buzzer state."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.2.6" , community: "private" }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+  -
+    name: RedLightTimer
+    description: "Red light timer."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.3.1" , community: "private" }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+  -
+    name: AmberLightTimer
+    description: "Amber light timer."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.3.2" , community: "private" }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+  -
+    name: GreenLightTimer
+    description: "Green light timer."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.3.3" , community: "private" }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+  -
+    name: BuzzerTimer
+    description: "Green light timer."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.3.6" , community: "private" }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+  -
+    name: RedLightCurrentState
+    description: "Red light current state."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.4.1" , community: "private" }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+  -
+    name: AmberLightCurrentState
+    description: "Amber light current state."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.4.2" , community: "private" }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+  -
+    name: GreenLightCurrentState
+    description: "Green light current state."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.4.3" , community: "private" }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+  -
+    name: BuzzerCurrentState
+    description: "Buzzer current state."
+    attributes:
+      { oid: "1.3.6.1.4.1.20440.4.1.5.1.2.1.4.6" , community: "private" }
+    properties:
+      value:
+        { type: "INT32", size: "4", readWrite: "RW", minimum: "1", maximum: "5", defaultValue: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
+
+resources:
+  -
+    name: RedLight
+    get:
+      - { operation: "get", object: "RedLightCurrentState", parameter: "RedLightControlState", property: "value" }
+
+    set:
+      - { index: "1", operation: "set", object: "RedLightControlState", property: "value", parameter: "RedLightControlState" }
+      - { index: "2", operation: "set", object: "RedLightTimer", property: "value", parameter: "RedLightTimer"}
+
+  -
+    name: GreenLight
+    get:
+      - { operation: "get", object: "GreenLightCurrentState", parameter: "GreenLightControlState", property: "value" }
+
+    set:
+      - { index: "1", operation: "set", object: "GreenLightControlState", property: "value", parameter: "GreenLightControlState" }
+      - { index: "2", operation: "set", object: "GreenLightTimer", property: "value", parameter: "GreenLightTimer"}
+  -
+    name: AmberLight
+    get:
+      - { operation: "get", object: "AmberLightCurrentState", parameter: "AmberLightControlState", property: "value" }
+
+    set:
+      - { index: "1", operation: "set", object: "AmberLightControlState", property: "value", parameter: "AmberLightControlState" }
+      - { index: "2", operation: "set", object: "AmberLightTimer", property: "value", parameter: "AmberLightTimer"}
+
+  -
+    name: Buzzer
+    get:
+      - { operation: "get", object: "BuzzerCurrentState", parameter: "BuzzerControlState", property: "value" }
+
+    set:
+      - { index: "1", operation: "set", object: "BuzzerControlState", property: "value", parameter: "BuzzerControlState" }
+      - { index: "2", operation: "set", object: "BuzzerTimer", property: "value", parameter: "BuzzerTimer"}
+
+
+  -
+    name: AllLights
+    get:
+      - { index: "1", operation: "get", object: "RedLightCurrentState", parameter: "RedLightControlState", property: "value" }
+      - { index: "2", operation: "get", object: "GreenLightCurrentState", parameter: "GreenLightControlState", property: "value" }
+      - { index: "3", operation: "get", object: "AmberLightCurrentState", parameter: "AmberLightControlState", property: "value" }
+      - { index: "4", operation: "get", object: "BuzzerCurrentState", parameter: "BuzzerControlState", property: "value" }
+
+
+commands:
+  -
+    name: AllLights
+    get:
+      path: "/api/v1/device/{deviceId}/AllLights"
+      responses:
+        -
+          code: "200"
+          description: "Get all light States."
+          expectedValues: ["RedLightControlState, GreenLightControlState, AmberLightControlState, BuzzerControlState"]
+        -
+          code: "503"
+          description: "service unavailable"
+          expectedValues: []
+  -
+    name: RedLight
+    get:
+      path: "/api/v1/device/{deviceId}/RedLight"
+      responses:
+        -
+          code: "200"
+          description: "Get the red light State."
+          expectedValues: ["RedLightControlState"]
+        -
+          code: "503"
+          description: "service unavailable"
+          expectedValues: []
+
+    put:
+      path: "/api/v1/device/{deviceId}/RedLight"
+      parameterNames: ["RedLightControlState", "RedLightTimer"]
+      responses:
+        -
+          code: "204"
+          description: "Set the red light."
+          expectedValues: []
+        -
+          code: "503"
+          description: "service unavailable"
+          expectedValues: []
+
+  -
+    name: GreenLight
+    get:
+      path: "/api/v1/device/{deviceId}/GreenLight"
+      responses:
+        -
+          code: "200"
+          description: "Get the green light State."
+          expectedValues: ["GreenLightControlState"]
+        -
+          code: "503"
+          description: "service unavailable"
+          expectedValues: []
+
+    put:
+      path: "/api/v1/device/{deviceId}/GreenLight"
+      parameterNames: ["GreenLightControlState", "GreenLightTimer"]
+      responses:
+        -
+          code: "204"
+          description: "Set the green light."
+          expectedValues: []
+        -
+          code: "503"
+          description: "service unavailable"
+          expectedValues: []
+
+  -
+
+    name: AmberLight
+    get:
+      path: "/api/v1/device/{deviceId}/AmberLight"
+      responses:
+        -
+          code: "200"
+          description: "Get the green light State."
+          expectedValues: ["AmberLightControlState"]
+        -
+          code: "503"
+          description: "service unavailable"
+          expectedValues: []
+
+    put:
+      path: "/api/v1/device/{deviceId}/AmberLight"
+      parameterNames: ["AmberLightControlState", "AmberLightTimer"]
+      responses:
+        -
+          code: "204"
+          description: "Set the green light."
+          expectedValues: []
+        -
+          code: "503"
+          description: "service unavailable"
+          expectedValues: []
+
+
+  -
+    name: Buzzer
+    get:
+      path: "/api/v1/device/{deviceId}/Buzzer"
+      responses:
+        -
+          code: "200"
+          description: "Get the Buzzer State."
+          expectedValues: ["BuzzerControlState"]
+        -
+          code: "503"
+          description: "service unavailable"
+          expectedValues: []
+
+    put:
+      path: "/api/v1/device/{deviceId}/Buzzer"
+      parameterNames: ["BuzzerControlState", "BuzzerTimer"]
+      responses:
+        -
+          code: "204"
+          description: "Set the buzzer."
+          expectedValues: []
+        -
+          code: "503"
+          description: "service unavailable"
+          expectedValues: []

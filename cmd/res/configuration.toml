@@ -1,0 +1,80 @@
+[Service]
+Host = "192.168.10.205"
+Port = 49993
+ConnectRetries = 3
+Labels = []
+OpenMsg = "device snmp switch GO started"
+ReadMaxLimit = 256
+Timeout = 5000
+EnableAsyncReadings = true
+AsyncBufferSize = 16
+
+[Registry]
+Host = "localhost"
+Port = 8500
+CheckInterval = "10s"
+FailLimit = 3
+FailWaitTime = 10
+Type = "consul"
+
+[Clients]
+  [Clients.Data]
+  Name = "edgex-core-data"
+  Protocol = "http"
+  Host = "localhost"
+  Port = 48080
+  Timeout = 5000
+
+  [Clients.Metadata]
+  Name = "edgex-core-metadata"
+  Protocol = "http"
+  Host = "localhost"
+  Port = 48081
+  Timeout = 5000
+
+  [Clients.Logging]
+  Name = "edgex-support-logging"
+  Protocol = "http"
+  Host = "localhost"
+  Port = 48061
+
+[Writable]
+LogLevel = 'INFO'
+
+[Device]
+  DataTransform = true
+  InitCmd = ""
+  InitCmdArgs = ""
+  MaxCmdOps = 128
+  MaxCmdValueLen = 256
+  RemoveCmd = ""
+  RemoveCmdArgs = ""
+  ProfilesDir = "./res"
+
+[Logging]
+EnableRemote = false
+File = "./device-snmp-device.log"
+Level = "INFO"
+
+# Pre-define Devices
+[[DeviceList]]
+  Name = "trendnet01"
+  Profile = "trendnet"
+  Description = "Switch SNMP service interface"
+  Labels = [ "device-snmp-switch-example" ]
+  [DeviceList.Protocols]
+    [DeviceList.Protocols.TCP]
+    Address = "192.168.10.200"
+    Port = "161"
+  [[DeviceList.AutoEvents]]
+    Frequency = "10s"
+    OnChange = true
+    Resource = "MacAddress"
+  [[DeviceList.AutoEvents]]
+    Frequency = "15s"
+    OnChange = true
+    Resource = "Firmware"
+  [[DeviceList.AutoEvents]]
+    Frequency = "5s"
+    OnChange = false
+    Resource = "Uptime"

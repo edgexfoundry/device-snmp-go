@@ -1,0 +1,238 @@
+---------------------------------------------------------------------------------------
+-- SNMP Cntrl OID's TredNet POE/Non POE
+-- Example of how the OID's would look as viewed in a MIB browser
+---------------------------------------------------------------------------------------
+Name: rebRestart
+Type: OBJECT-TYPE
+OID: 1.3.6.1.4.1.28866.2.26.24.5.1
+Full path:
+iso(1).org(3).dod(6).internet(1).private(4).enterprises(1).trendnet(28866).products(2).trendnet_series(26).sysTools(24).sysReboot(5).rebRestart(1)
+Module: TEG-082WS-MIB
+
+Parent: sysReboot
+
+Numerical syntax: Integer (32bit)
+Base syntax: INTEGER
+Composed syntax: INTEGER
+Status: current
+Max access: read-write
+
+Value list:
+1: normal(1)
+2: reset(2)
+3: resetwithoutip(3)
+
+Default values:
+1: normal(name)
+
+
+Description:
+the object is used to restart the system with the different type.
+
+
+---------------------------------------------------------------------------------------
+Name: sysInfoUpTime
+Type: OBJECT-TYPE
+OID: 1.3.6.1.4.1.28866.2.26.16.1.1
+Full path:
+iso(1).org(3).dod(6).internet(1).private(4).enterprises(1).trendnet(28866).products(2).trendnet_series(26).sysSystem(16).sysSystemInfo(1).sysInfoUpTime(1)
+Module: TEG-082WS-MIB
+
+
+Parent: sysSystemInfo
+Next sibling: sysInfoFirmwareVersion
+
+
+Numerical syntax: timeticks
+Base syntax: TimeTicks
+Composed syntax: TimeTicks
+Status: current
+Max access: read-only
+
+
+Description:
+The time (in hundredths of a second) since the
+network management portion of the system was last
+re-initialized.
+
+
+---------------------------------------------------------------------------------------
+Name: systemSwitchBaseMacAddress
+Type: OBJECT-TYPE
+OID: 1.3.6.1.4.1.28866.2.26.16.2.1
+Full path:
+iso(1).org(3).dod(6).internet(1).private(4).enterprises(1).trendnet(28866).products(2).trendnet_series(26).sysSystem(16).sysSystemCtrl(2).systemSwitchBaseMacAddress(1)
+Module: TEG-082WS-MIB
+
+Parent: sysSystemCtrl
+Next sibling: systemWebAutoTimeoutInterval
+
+
+Numerical syntax: Octets
+Base syntax: OCTET STRING
+Composed syntax: MacAddress
+Status: current
+Max access: read-only
+
+
+Description:
+Ethernet address (base address) of the Switch.
+This base Mac Address, if modified, will take effect only when the
+Switch is restarted.
+
+
+---------------------------------------------------------------------------------------
+Name: sysInfoFirmwareVersion
+Type: OBJECT-TYPE
+OID: 1.3.6.1.4.1.28866.2.26.16.1.2
+Full path:
+iso(1).org(3).dod(6).internet(1).private(4).enterprises(1).trendnet(28866).products(2).trendnet_series(26).sysSystem(16).sysSystemInfo(1).sysInfoFirmwareVersion(2)
+Module: TEG-082WS-MIB
+
+
+Parent: sysSystemInfo
+Previous sibling: sysInfoUpTime
+Next sibling: sysInfoBootloaderVersion
+
+
+Numerical syntax: Octets
+Base syntax: OCTET STRING
+Composed syntax: DisplayString
+Status: current
+Max access: read-only
+Size list:
+  1: 1..15
+Default values:
+  1: (char string)
+
+
+Description:
+Version number of the Firmware.
+
+---------------------------------------------------------------------------------------
+
+Name: ipv4sysIpAddr
+Type: OBJECT-TYPE
+OID: 1.3.6.1.4.1.28866.2.26.16.3.2
+Full path:
+iso(1).org(3).dod(6).internet(1).private(4).enterprises(1).trendnet(28866).products(2).trendnet_series(26).sysSystem(16).sysIPv4SysSettings(3).ipv4sysIpAddr(2)
+Module: TEG-082WS-MIB
+
+
+Parent: sysIPv4SysSettings
+Previous sibling: ipv4sysIpAddrCfgMode
+Next sibling: ipv4SysIpSubnetMask
+
+
+Numerical syntax: ipaddr
+Base syntax: IpAddress
+Composed syntax: IpAddress
+Status: current
+Max access: read-write
+
+
+Description:
+Default IP Address of the system.
+
+This IP address, if modified, will take effect only when the
+configuration is stored & restored.
+
+
+--------------------------------------------------------------------------------------
+
+Name: ipv4SysIpSubnetMask
+Type: OBJECT-TYPE
+OID:
+1.3.6.1.4.1.28866.2.26.16.3.3
+Full path:
+iso(1).org(3).dod(6).internet(1).private(4).enterprises(1).trendnet(28866).products(2).trendnet_series(26).sysSystem(16).sysIPv4SysSettings(3).ipv4SysIpSubnetMask(3)
+Module:
+TEG-082WS-MIB
+
+
+Parent:
+sysIPv4SysSettings
+Previous sibling:
+ipv4sysIpAddr
+Next sibling:
+ipv4SysGateway
+
+
+Numerical syntax:
+ipaddr
+Base syntax:
+IpAddress
+Composed syntax:
+IpAddress
+Status:
+current
+Max access:
+read-write
+
+
+Description:
+IP subnet mask for the default IP address.
+
+This subnet mask, if modified, will take effect only when the
+configuration is stored & restored.
+--------------------------------------------------------------------------------------
+
+Name:
+ipv4SysGateway
+Type:
+OBJECT-TYPE
+OID:
+1.3.6.1.4.1.28866.2.26.16.3.4
+Full path:
+iso(1).org(3).dod(6).internet(1).private(4).enterprises(1).trendnet(28866).products(2).trendnet_series(26).sysSystem(16).sysIPv4SysSettings(3).ipv4SysGateway(4)
+Module:
+TEG-082WS-MIB
+
+
+Parent:
+sysIPv4SysSettings
+Previous sibling:
+ipv4SysIpSubnetMask
+
+
+Numerical syntax:
+ipaddr
+Base syntax:
+IpAddress
+Composed syntax:
+IpAddress
+Status:
+current
+Max access:
+read-write
+
+
+Description:
+Gateway
+
+
+
+---------------------------------------------------------------------------------------
+-- SNMP RMON OID's
+---------------------------------------------------------------------------------------
+
+Name: rmonEnableStatus
+Type: OBJECT-TYPE
+OID: 1.3.6.1.4.1.28866.2.26.15.1.1
+Full path:
+iso(1).org(3).dod(6).internet(1).private(4).enterprises(1).trendnet(28866).products(2).trendnet_series(26).sysRMON(15).rmonGlobal(1).rmonEnableStatus(1)
+Module: TEG-082WS-MIB
+
+Parent: rmonGlobal
+
+Numerical syntax: Integer (32bit)
+Base syntax: INTEGER
+Composed syntax: INTEGER
+Status: current
+Max access: read-write
+Value list:
+1: enabled(1)
+2: disabled(2)
+
+Description: This object defines the rmonenable flag for rmon
+
