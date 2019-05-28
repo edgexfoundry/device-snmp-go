@@ -1,6 +1,6 @@
 ## DOCKER CONFIGURATION TOML
 [Service]
-Host = "edgex-device-snmp-switch"
+Host = "edgex-device-snmp"
 Port = 49993
 ConnectRetries = 3
 Labels = []
@@ -58,6 +58,7 @@ File = "./device-snmp-device.log"
 Level = "INFO"
 
 # Pre-define Devices
+# Note: you will need to modify the IP to a DNS or named resource potentially.
 [[DeviceList]]
   Name = "trendnet01"
   Profile = "trendnet"

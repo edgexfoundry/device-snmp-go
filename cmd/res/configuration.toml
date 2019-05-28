@@ -3,7 +3,7 @@ Host = "192.168.10.205"
 Port = 49993
 ConnectRetries = 3
 Labels = []
-OpenMsg = "device snmp switch GO started"
+OpenMsg = "device snmp GO started"
 ReadMaxLimit = 256
 Timeout = 5000
 EnableAsyncReadings = true
@@ -57,6 +57,8 @@ File = "./device-snmp-device.log"
 Level = "INFO"
 
 # Pre-define Devices
+# NOTE: You will need to modify the Address to a DNS or named resource potentially.
+#       Port 161 is the default SNMP provider port.
 [[DeviceList]]
   Name = "trendnet01"
   Profile = "trendnet"

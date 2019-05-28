@@ -15,6 +15,6 @@
 
 .idea/
 vendor/
-cmd/device-snmp-switch-go
+cmd/device-snmp-go
 glide.lock
 go.sum

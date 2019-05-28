@@ -14,7 +14,7 @@ RUN sed -e 's/dl-cdn[.]alpinelinux.org/nl.alpinelinux.org/g' -i~ /etc/apk/reposi
 # Install our build time packages.
 RUN apk add --no-cache ${ALPINE_PKG_BASE} ${ALPINE_PKG_EXTRA}
 
-WORKDIR $GOPATH/src/github.com/edgexfoundry-holding/device-snmp-switch-go
+WORKDIR $GOPATH/src/github.com/edgexfoundry/device-snmp-go
 
 COPY . .
 
@@ -34,6 +34,6 @@ EXPOSE $APP_PORT
 ENV DEVICE_PORT=161
 EXPOSE $DEVICE_PORT
 
-COPY --from=builder /go/src/github.com/edgexfoundry-holding/device-snmp-switch-go/cmd /
+COPY --from=builder /go/src/github.com/edgexfoundry/device-snmp-go/cmd /
 
-ENTRYPOINT ["/device-snmp-switch-go","--registry","--profile=docker","--confdir=/res"]
+ENTRYPOINT ["/device-snmp-go","--registry","--profile=docker","--confdir=/res"]

@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------
--- SNMP Cntrl OID's TredNet POE/Non POE
+-- SNMP OID's TredNet POE/Non POE
 -- Example of how the OID's would look as viewed in a MIB browser
 ---------------------------------------------------------------------------------------
 Name: rebRestart

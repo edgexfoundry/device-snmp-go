@@ -7,13 +7,13 @@
 package main
 
 import (
-	"github.com/edgexfoundry-holding/device-snmp-switch-go/internal/driver"
+	"github.com/edgexfoundry/device-snmp-go/internal/driver"
 	"github.com/edgexfoundry/device-sdk-go/pkg/startup"
 )
 
 const (
 	version     string = "1.0.0"
-	serviceName string = "device-snmp-switch-go"
+	serviceName string = "device-snmp-go"
 )
 
 func main() {
