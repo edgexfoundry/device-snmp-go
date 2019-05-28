@@ -1,7 +1,7 @@
-module github.com/edgexfoundry-holding/device-snmp-switch-go
+module github.com/edgexfoundry/device-snmp-go
 
 require (
-	github.com/edgexfoundry/device-sdk-go v0.0.0-20190501095339-adae7514d67b
-	github.com/edgexfoundry/go-mod-core-contracts v0.0.0-20190501042311-65beb1e99b02
+	github.com/edgexfoundry/device-sdk-go v0.0.0-20190524041108-4cdf0647f000
+	github.com/edgexfoundry/go-mod-core-contracts v0.0.1
 	github.com/soniah/gosnmp v1.21.0
 )
