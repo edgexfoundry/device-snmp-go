@@ -5,11 +5,12 @@
 
 ARG ALPINE=golang:1.11-alpine
 FROM ${ALPINE} AS builder
+
 ARG ALPINE_PKG_BASE="build-base git openssh-client"
 ARG ALPINE_PKG_EXTRA=""
 
 # Replicate the APK repository override.
-# If it is no longer necessary to avoid the CDN mirros we should consider dropping this as it is brittle.
+# If it is no longer necessary to avoid the CDN mirrors we should consider dropping this as it is brittle.
 RUN sed -e 's/dl-cdn[.]alpinelinux.org/nl.alpinelinux.org/g' -i~ /etc/apk/repositories
 # Install our build time packages.
 RUN apk add --no-cache ${ALPINE_PKG_BASE} ${ALPINE_PKG_EXTRA}
