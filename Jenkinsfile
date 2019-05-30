@@ -66,7 +66,7 @@ pipeline {
             steps {
                 unstash 'semver'
                 sh 'echo v${VERSION}'
-                sh 'git tag -a v${VERSION} -m "v${VERSION}"'
+                edgeXSemver('tag')
                 edgeXInfraLFToolsSign(command: 'git-tag', version: 'v${VERSION}')
                 edgeXSemver('push')
             }
@@ -117,7 +117,7 @@ def doPush(arch, image='edgexfoundry/device-snmp-go') {
 }
 
 def dockerBuild(arch, image) {
-    sh "docker build --tag ${image}:${arch} ."
+    sh "docker build --build-arg 'MAKE=build test' --tag ${image}:${arch} ."
 }
 
 def dockerSave(arch, image) {
@@ -137,7 +137,7 @@ def dockerPush(arch, image, registry) {
     def mach = readFile("${arch}.txt").trim()
     def versions = [ env.VERSION, 'latest' ]
     for (ver in versions) {
-        docker.withRegistry(registry, 'device-snmp-go') {
+        docker.withRegistry(registry, 'device-snmp') {
             img.push("${ver}-${arch}")
             img.push("${ver}-${mach}")
         }
