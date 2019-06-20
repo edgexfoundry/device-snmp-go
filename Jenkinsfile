@@ -90,7 +90,7 @@ pipeline {
             }
             steps {
                 unstash 'semver'
-                edgeXSemver('bump patch')
+                edgeXSemver('bump pre')
                 edgeXSemver('push')
             }
         }
