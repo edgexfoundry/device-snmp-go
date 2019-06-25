@@ -6,7 +6,7 @@
 ARG ALPINE=golang:1.11-alpine
 FROM ${ALPINE} AS builder
 
-ARG ALPINE_PKG_BASE="build-base git openssh-client"
+ARG ALPINE_PKG_BASE="build-base git openssh-client curl bash"
 ARG ALPINE_PKG_EXTRA=""
 
 # Replicate the APK repository override.

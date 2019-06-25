@@ -43,16 +43,57 @@ pipeline {
                     agent {
                         label 'centos7-docker-4c-2g'
                     }
-                    steps {
-                        doBuild 'amd64'
+                    stages {
+                        stage('Test') {
+                            agent {
+                                dockerfile {
+                                    filename 'Dockerfile'
+                                    label 'centos7-docker-4c-2g'
+                                    additionalBuildArgs "--target builder --build-arg 'MAKE=build test'"
+                                    args '-u 0:0'
+                                }
+                            }
+                            steps {
+                                sh 'make build'
+                                sh 'make test'
+                                edgeXCodecov('device-snmp-go-codecov-token')
+                            }
+                        }
+
+                        stage('Build') {
+                            steps {
+                                doBuild 'amd64'
+                            }
+                        }
                     }
+                    
                 }
                 stage('build-arm64') {
                     agent {
                         label 'ubuntu18.04-docker-arm64-4c-2g'
                     }
-                    steps {
-                        doBuild 'arm64'
+                    stages {
+                        stage('Test') {
+                            agent {
+                                dockerfile {
+                                    filename 'Dockerfile'
+                                    label 'ubuntu18.04-docker-arm64-4c-2g'
+                                    additionalBuildArgs "--target builder --build-arg 'MAKE=build test'"
+                                    args '-u 0:0'
+                                }
+                            }
+                            steps {
+                                sh 'make build'
+                                sh 'make test'
+                                edgeXCodecov('device-snmp-go-codecov-token')
+                            }
+                        }
+
+                        stage('Build') {
+                            steps {
+                                doBuild 'arm64'
+                            }
+                        }
                     }
                 }
             }
@@ -119,6 +160,13 @@ def doPush(arch, image='edgexfoundry/device-snmp-go') {
 def dockerBuild(arch, image) {
     sh "docker build --build-arg 'MAKE=build test' --tag ${image}:${arch} ."
 }
+
+// def dockerTestCoverage(arch, image){
+//     sh "docker build --target builder --build-arg 'MAKE=build test' --tag ${image}-builder:${arch} ."
+//     docker.image("${image}-builder:${arch}").withRun('-u 0:0') {
+//         edgeXCodecov('device-snmp-go-codecov-token')
+//     }
+// }
 
 def dockerSave(arch, image) {
     sh "docker image save --output ${arch}.tar ${image}:${arch}"
