@@ -1,9 +1,11 @@
-# edgexfoundry-holding/device-snmp-switch-go (ALPHA)
+# edgexfoundry/device-snmp-go
 
 #### Overview:
-Network switch device driver.  This device service facilitates accessing the TrendNet TEG-082WS 10 port switch.
+A generic SNMP device service. Included is a sample for a network switch device driver. Additionally, a Patlite profile is included in the profiles director. 
+
+This device service facilitates via the configuration, accessing the TrendNet TEG-082WS 10 port switch.
 You can send and receive event readings from the network switch.  Currently this device service is tailored specifically to the TrendNET TEG-082WS switch but refactoring could take place to abstract the device type and provde a myrida of device profiles. You would need to interogate the network switch and then determine the appropriate device profile.   This particular device service uses the SNMP (Simple Netowrk Management Protocol).
-SNMP communication with the switch premits the device service to create events based on the Network Switch data. For further information on the Simple Network Mangement Protocol [`SNMP Wiki`][ExWk]
+SNMP communication with the switch permits the device service to create events based on the Network Switch data. For further information on the Simple Network Mangement Protocol [`SNMP Wiki`][ExWk]
 
 #### TODOS
 > Async callbacks not supported
@@ -13,14 +15,14 @@ SNMP communication with the switch premits the device service to create events b
 
 ### Pre-Requisites
 
-device-snmp-switch-go requires [Go](https://golang.org/dl/) language. Download the current release if you don't have it already.
+device-snmp-go requires [Go](https://golang.org/dl/) language. Download the current release if you don't have it already.
 Have access to the  [`EdgeX Foundry`](https://github.com/edgexfoundry) project github site.  
 
 ### EdgeX-Go (The EdgeX Platform and Sevices)
 This service requires the EdgeX-Go platform and serveral of its services to be up and running if you want to test the device service full integration. 
 However, you can run this service as a standalone with the following minium services up and running either a) natively (.exe) or b) as Docker image containers.
 
-Detailed instructions on how to use the varioud Edgex-Foundry service(s) are linked below.  
+Detailed instructions on how to use the various Edgex-Foundry service(s) are linked below.  
 
 | Service | README |
 | ------ | ------ |
@@ -145,8 +147,8 @@ This service is driven by a `configuration.toml` [TOML-based](https://en.wikiped
     
 | Parent | Entry | Description |
 | ----- | ----- | ----- |
+|``[Writable]``|| configuration entry for the `Writeable`. Sections which can be overwritten via external or internal configuration. | 
 |``[Service]``|| configuration entry for the `Service` which will be running | 
-||`LogLevel`| a string, this defines the minimum message level to log.  Valid values include `none`, `debug`, `info`, `warning`, and `error`.|
 ||`ServerHost`| a string, this defines the domain or ip address the application should bind to for handling inbound dashboard requests. It's also the address used when assembling the callback uri provided to EdgeX's export-distro service to deliver events.  If you follow the [Start Up](#start-up) directions, it shouldn't be `localhost` since it needs to be a bindable address in your local host environment that can be reached from inside the edgex-export-distro container.  On my development machine, I used my host's IP address and updated my anti-virus's software firewall to allow the `ServerPort` through for all addresses. |
 ||`ServerPort`| an int, this defines the TCP/IP port the application should bind to for handling inbound dashboard requests.|
 ||`ConnectionRetries`| an int, this defines the maximum retry attempts to connect to this service.|
@@ -182,22 +184,17 @@ This service is driven by a `configuration.toml` [TOML-based](https://en.wikiped
 ||`EnableRemote`|a `true` or `false` remote logging|
 ||`File`|a string representing the file path for the local logging file. example: "./device-snmp-device.log"|
 ||`Level`|a string representing the Log Levels. Example: `DEBUG`,`WARN`, `ERROR`, or `INFO`|
-|`[[Schedules]]`||configuration representing the scheduling for a periodic interval in time. Note: This can occur more then once.  So you could have `N number` of complete `[[Schedules]]` defined in your configuration, for more then one time interval defined. |
-||`Name`| string representing the `unique` name for a given time period|
-||`Frequency`|a string representing the time interval in CRON format. see [CRON FORMAT](http://www.nncron.ru/help/EN/working/cron-format.htm)|
-|`[[ScheduleEvents]]`||configuration entry representing the `Event` which you want to occur for at a given `Schedule` time interval. Note: This can occur more then once.  So you could have `N number` of complete `[[ScheduleEvents]]` defined in your configuration, for more then one ScheduleEvents defined. They can reference the same `Schedule` or a completely different one you have defined in the configuration.|
-||`Name`|a string representing the `unique` name of the schedule event|
-||`Schedule`| a string representing the `unique` name of a configured schedule. NOTE: This can be one of the previously defined schedule event intervals see the [EdgeX-Go Device SDK]()|
-||`[ScheduleEvents.Addressable]`|configuration used to define the Schedule Event Addresable|
-||`HTTPMethod`| a string representing the HTTP Verb used with the event. Example: `GET`,`PUT`,`DELETE`, etc..|
-||`Path`| a string representing the relative path of execution for the given schedule event. Example: "/api/v1/device/name/trednet01/Uptime"|
 |`[[DeviceList]]`||configuration entry representing a list of device services.|
 ||`Name`| a string representing the name of the device to be configured. This is the actual hardware device name.|
 ||`Profile`| a string representing the `Profile` name to be used in edgex-core-command and edgex-core-metadata. This is the profile for your given device which will be listed via the core-metadata service REST API.|
-||`[DeviceList.Addressable`|configuration representing the Addressable for a given Device|
+||`[DeviceList.Protocols`|configuration representing the protocol for a given Device|
 ||`Address`| a string representing the IP address for the device.  This should be relative to your network which you are using.|
 ||`Port`|an int representing the `Port` for your device|
 ||`Protocol`|a string representing the `Protocol` used to communicate with the configured device. Example: `HTTP`, or `TCP`.|
+|`[[DeviceList.AutoEvents]]`||configuration representing the scheduling for a periodic interval in time. Note: This can occur more then once.  So you could have `N number` of complete `[[AutoEvents]]` defined in your configuration, for more then one time interval defined. |
+||`Frequency`|a string representing the time interval in CRON format. see [CRON FORMAT](http://www.nncron.ru/help/EN/working/cron-format.htm)|
+||`Resource`| string representing the `unique` name for a given device resource.|
+||`Port`|an int representing the `Port` for your device|
 
 
 
