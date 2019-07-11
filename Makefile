@@ -20,7 +20,7 @@ cmd/device-snmp-go:
 	$(GO) build $(GOFLAGS) -o $@ ./cmd
 
 test:
-	$(GO) test ./... -cover
+	$(GO) test ./... -coverprofile=coverage.out
 
 clean:
 	rm -f $(MICROSERVICES)
