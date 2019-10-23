@@ -81,7 +81,7 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 		client = NewSNMPClient(Address, uint16(port))
 	}
 
-	now := time.Now().UnixNano() / int64(time.Millisecond)
+	now := time.Now().UnixNano()
 
 	// this an be any type either string or int at this point
 	var vals, err2 = client.GetValues(commands)
