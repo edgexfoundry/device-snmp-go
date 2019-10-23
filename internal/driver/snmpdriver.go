@@ -243,3 +243,18 @@ func (s *SNMPDriver) Stop(force bool) error {
 	client.Disconnect()
 	return nil
 }
+
+func (d *SNMPDriver) AddDevice(deviceName string, protocols map[string]models.ProtocolProperties, adminState models.AdminState) error {
+	d.lc.Debug(fmt.Sprintf("a new Device is added: %s", deviceName))
+	return nil
+}
+
+func (d *SNMPDriver) UpdateDevice(deviceName string, protocols map[string]models.ProtocolProperties, adminState models.AdminState) error {
+	d.lc.Debug(fmt.Sprintf("Device %s is updated", deviceName))
+	return nil
+}
+
+func (d *SNMPDriver) RemoveDevice(deviceName string, protocols map[string]models.ProtocolProperties) error {
+	d.lc.Debug(fmt.Sprintf("Device %s is removed", deviceName))
+	return nil
+}
