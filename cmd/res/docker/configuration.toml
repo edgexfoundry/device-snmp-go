@@ -5,7 +5,6 @@ Port = 49993
 ConnectRetries = 3
 Labels = []
 OpenMsg = "device snmp switch GO started"
-ReadMaxLimit = 256
 Timeout = 5000
 EnableAsyncReadings = true
 AsyncBufferSize = 16
@@ -53,7 +52,7 @@ LogLevel = 'INFO'
   ProfilesDir = "./res"
 
 [Logging]
-EnableRemote = false
+EnableRemote = true
 File = "./device-snmp-device.log"
 Level = "INFO"
 
