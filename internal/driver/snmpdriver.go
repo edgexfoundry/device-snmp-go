@@ -46,7 +46,7 @@ func (s *SNMPDriver) Initialize(lc logger.LoggingClient, asyncCh chan<- *dsModel
 // HandleReadCommands triggers a protocol Read operation for the specified device.
 func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]models.ProtocolProperties, reqs []dsModels.CommandRequest) (res []*dsModels.CommandValue, err error) {
 
-	res = make([]*dsModels.CommandValue,0)
+	res = make([]*dsModels.CommandValue, 0)
 
 	if len(reqs) != 1 {
 		err = fmt.Errorf("SimpleDriver.HandleReadCommands; too many command requests; only one supported")
@@ -59,12 +59,10 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 	Address := TCP["Address"]
 	Port := TCP["Port"]
 
-
-
 	//s.lc.Debug(fmt.Sprintf("SimpleDriver.HandleReadCommands: protocols: %v operation: %v attributes: %v", protocols, reqs[0].RO.Operation, reqs[0].DeviceResource.Attributes))
 
-	s.lc.Debug("Port %s",Port)
-	s.lc.Debug("Address",Address)
+	s.lc.Debug("Port %s", Port)
+	s.lc.Debug("Address", Address)
 
 	var commands []DeviceCommand
 	for _, req := range reqs {

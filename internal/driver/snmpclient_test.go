@@ -32,6 +32,6 @@ func TestSNMPDriver_HandleWriteCommands(t *testing.T) {
 
 }
 
-func init(){
+func init() {
 
 }
