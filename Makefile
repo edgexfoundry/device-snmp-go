@@ -9,7 +9,7 @@ MICROSERVICES=cmd/device-snmp-go
 DOCKERS=docker_device_snmp_go
 .PHONY: $(DOCKERS)
 
-VERSION=$(shell cat ./VERSION)
+VERSION=$(shell cat ./VERSION 2>/dev/null || echo 0.0.0)
 GIT_SHA=$(shell git rev-parse HEAD)
 GOFLAGS=-ldflags "-X github.com/edgexfoundry/device-snmp-go.Version=$(VERSION)"
 
@@ -29,6 +29,9 @@ test:
 
 clean:
 	rm -f $(MICROSERVICES)
+
+update:
+	$(GO) mod download
 
 run:
 	cd bin && ./edgex-launch.sh
