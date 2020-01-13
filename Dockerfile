@@ -3,10 +3,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG ALPINE=golang:1.11-alpine
-FROM ${ALPINE} AS builder
+ARG BASE=golang:1.11-alpine
+FROM ${BASE} AS builder
 
-ARG ALPINE_PKG_BASE="build-base git openssh-client curl bash"
+ARG MAKE="make build"
+ARG ALPINE_PKG_BASE="make git"
 ARG ALPINE_PKG_EXTRA=""
 
 # Replicate the APK repository override.
@@ -17,16 +18,15 @@ RUN apk add --no-cache ${ALPINE_PKG_BASE} ${ALPINE_PKG_EXTRA}
 
 WORKDIR $GOPATH/src/github.com/edgexfoundry/device-snmp-go
 
+COPY go.mod .
+COPY Makefile .
+
+RUN make update
+
 COPY . .
+RUN ${MAKE}
 
-# To run tests in the build container:
-#   docker build --build-arg 'MAKE=build test' .
-# This is handy of you do your Docker business on a Mac
-ARG MAKE=build
-RUN make $MAKE
-
-
-FROM scratch
+FROM alpine
 
 # Make sure you change the cmd/res/configuration.toml port if you change it here
 ENV APP_PORT=49993

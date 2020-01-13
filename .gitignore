@@ -18,3 +18,5 @@ vendor/
 cmd/device-snmp-go
 glide.lock
 go.sum
+
+VERSION
