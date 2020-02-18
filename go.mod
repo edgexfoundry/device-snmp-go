@@ -5,3 +5,5 @@ require (
 	github.com/edgexfoundry/go-mod-core-contracts v0.1.31
 	github.com/soniah/gosnmp v1.21.0
 )
+
+go 1.13
