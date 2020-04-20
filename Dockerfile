@@ -34,4 +34,4 @@ EXPOSE $DEVICE_PORT
 
 COPY --from=builder /go/src/github.com/edgexfoundry/device-snmp-go/cmd /
 
-ENTRYPOINT ["/device-snmp-go","--profile=docker","--confdir=/res","--registry=consul://edgex-core-consul:8500"]
+ENTRYPOINT ["/device-snmp-go","--cp=consul://edgex-core-consul:8500","--confdir=/res","--registry"]
