@@ -1,6 +1,7 @@
 // -*- Mode: Go; indent-tabs-mode: t -*-
 //
 // Copyright (C) 2018-2019 Dell Technologies
+// Copyright (C) 2020 IOTech Ltd
 //
 // SPDX-License-Identifier: Apache-2.0
 
@@ -37,7 +38,7 @@ func (s *SNMPDriver) DisconnectDevice(deviceName string, protocols map[string]mo
 
 // Initialize performs protocol-specific initialization for the device
 // service.
-func (s *SNMPDriver) Initialize(lc logger.LoggingClient, asyncCh chan<- *dsModels.AsyncValues) error {
+func (s *SNMPDriver) Initialize(lc logger.LoggingClient, asyncCh chan<- *dsModels.AsyncValues, deviceCh chan<- []dsModels.DiscoveredDevice) error {
 	s.lc = lc
 	s.asyncCh = asyncCh
 	return nil

@@ -33,5 +33,7 @@ ENV DEVICE_PORT=161
 EXPOSE $DEVICE_PORT
 
 COPY --from=builder /go/src/github.com/edgexfoundry/device-snmp-go/cmd /
+COPY --from=builder /go/src/github.com/edgexfoundry/device-snmp-go/Attribution.txt /
+COPY --from=builder /go/src/github.com/edgexfoundry/device-snmp-go/LICENSE /
 
 ENTRYPOINT ["/device-snmp-go","--cp=consul://edgex-core-consul:8500","--confdir=/res","--registry"]
