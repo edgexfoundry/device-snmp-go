@@ -15,6 +15,5 @@
 //
 
 edgeXBuildGoApp (
-    project: 'device-snmp-go',
-    goVersion: '1.13'
+    project: 'device-snmp-go'
 )
