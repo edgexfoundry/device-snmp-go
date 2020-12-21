@@ -98,33 +98,33 @@ deviceCommands:
   -
     name: Reboot
     get:
-      - { operation: "get", object: "RebootCurrentState", property: "value", parameter: "reboot" }
+      - { operation: "get", deviceResource: "RebootCurrentState", property: "value", parameter: "reboot" }
     set:
-      - { operation: "set", object: "RebootControlState", property: "value", parameter: "RebootControlState"}
+      - { operation: "set", deviceResource: "RebootControlState", property: "value", parameter: "RebootControlState"}
   -
     name: Uptime
     get:
-      - { operation: "get", object: "UpTimeCurrentState", property: "value" , parameter: "uptime"}
+      - { operation: "get", deviceResource: "UpTimeCurrentState", property: "value" , parameter: "uptime"}
   -
     name: MacAddress
     get:
-      - { operation: "get", object: "MacAddressCurrentState", property: "value", parameter: "macaddress" }
+      - { operation: "get", deviceResource: "MacAddressCurrentState", property: "value", parameter: "macaddress" }
   -
     name: Firmware
     get:
-      - { operation: "get", object: "FirmwareCurrentState", property: "value", parameter: "firmware" }
+      - { operation: "get", deviceResource: "FirmwareCurrentState", property: "value", parameter: "firmware" }
   -
     name: IPV4Address
     get:
-      - { operation: "get", object: "IPV4AddressCurrentState", property: "value", parameter: "ipv4address" }
+      - { operation: "get", deviceResource: "IPV4AddressCurrentState", property: "value", parameter: "ipv4address" }
   -
     name: IPV4SubnetMask
     get:
-      - { operation: "get", object: "IPV4SubnetMaskCurrentState", property: "value", parameter: "ipv4subnetmask" }
+      - { operation: "get", deviceResource: "IPV4SubnetMaskCurrentState", property: "value", parameter: "ipv4subnetmask" }
   -
     name: IPV4GatewayAddress
     get:
-      - { operation: "get", object: "IPV4GatewayAddressCurrentState", property: "value", parameter: "ipv4gatewayaddress" }
+      - { operation: "get", deviceResource: "IPV4GatewayAddressCurrentState", property: "value", parameter: "ipv4gatewayaddress" }
 
 coreCommands:
   -
