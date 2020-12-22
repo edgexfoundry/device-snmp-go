@@ -117,7 +117,7 @@ deviceResources:
       units:
         { type: "String", readWrite: "R", defaultValue: "switch IPV4 gateway address"}
 
-resources:
+deviceCommands:
 
   -
     #POE POWER only available on PORTS 1-4
@@ -125,56 +125,56 @@ resources:
     # example json: [{"off":"2"},{"on1":"1"},{"off2":"2"},{"on2":"1"},{"off3":"2"},{"on3":"1"},{"off4":"2"},{"on4":"1"}]
     name: PowerCyclePorts
     set:
-      - { index: "1", operation: "set", object: "RebootCurrentStatePort1", property: "value", parameter: "off1"}
-      - { index: "2", operation: "set", object: "RebootCurrentStatePort1", property: "value", parameter: "on1"}
-      - { index: "3", operation: "set", object: "RebootCurrentStatePort2", property: "value", parameter: "off2"}
-      - { index: "4", operation: "set", object: "RebootCurrentStatePort2", property: "value", parameter: "on2"}
-      - { index: "5", operation: "set", object: "RebootCurrentStatePort3", property: "value", parameter: "off3"}
-      - { index: "6", operation: "set", object: "RebootCurrentStatePort3", property: "value", parameter: "on3"}
-      - { index: "7", operation: "set", object: "RebootCurrentStatePort4", property: "value", parameter: "off4"}
-      - { index: "8", operation: "set", object: "RebootCurrentStatePort4", property: "value", parameter: "on4"}
+      - { index: "1", operation: "set", deviceResource: "RebootCurrentStatePort1", property: "value", parameter: "off1"}
+      - { index: "2", operation: "set", deviceResource: "RebootCurrentStatePort1", property: "value", parameter: "on1"}
+      - { index: "3", operation: "set", deviceResource: "RebootCurrentStatePort2", property: "value", parameter: "off2"}
+      - { index: "4", operation: "set", deviceResource: "RebootCurrentStatePort2", property: "value", parameter: "on2"}
+      - { index: "5", operation: "set", deviceResource: "RebootCurrentStatePort3", property: "value", parameter: "off3"}
+      - { index: "6", operation: "set", deviceResource: "RebootCurrentStatePort3", property: "value", parameter: "on3"}
+      - { index: "7", operation: "set", deviceResource: "RebootCurrentStatePort4", property: "value", parameter: "off4"}
+      - { index: "8", operation: "set", deviceResource: "RebootCurrentStatePort4", property: "value", parameter: "on4"}
   -
     name: PowerPort1
     set:
-      - { operation: "set", object: "RebootCurrentStatePort1", property: "value", parameter: "powerport1"}
+      - { operation: "set", deviceResource: "RebootCurrentStatePort1", property: "value", parameter: "powerport1"}
   -
     name: PowerPort2
     set:
-      - { operation: "set", object: "RebootCurrentStatePort2", property: "value", parameter: "powerport2"}
+      - { operation: "set", deviceResource: "RebootCurrentStatePort2", property: "value", parameter: "powerport2"}
   -
     name: PowerPort3
     set:
-      - { operation: "set", object: "RebootCurrentStatePort3", property: "value", parameter: "powerport3"}
+      - { operation: "set", deviceResource: "RebootCurrentStatePort3", property: "value", parameter: "powerport3"}
   -
     name: PowerPort4
     set:
-      - { operation: "set", object: "RebootCurrentStatePort4", property: "value", parameter: "powerport4"}
+      - { operation: "set", deviceResource: "RebootCurrentStatePort4", property: "value", parameter: "powerport4"}
   -
     name: Uptime
     get:
-      - { operation: "get", object: "UpTimeCurrentState", property: "value" , parameter: "uptime"}
+      - { operation: "get", deviceResource: "UpTimeCurrentState", property: "value" , parameter: "uptime"}
   -
     name: MacAddress
     get:
-      - { operation: "get", object: "MacAddressCurrentState", property: "value", parameter: "macaddress" }
+      - { operation: "get", deviceResource: "MacAddressCurrentState", property: "value", parameter: "macaddress" }
   -
     name: Firmware
     get:
-      - { operation: "get", object: "FirmwareCurrentState", property: "value", parameter: "firmware" }
+      - { operation: "get", deviceResource: "FirmwareCurrentState", property: "value", parameter: "firmware" }
   -
     name: IPV4Address
     get:
-      - { operation: "get", object: "IPV4AddressCurrentState", property: "value", parameter: "ipv4address" }
+      - { operation: "get", deviceResource: "IPV4AddressCurrentState", property: "value", parameter: "ipv4address" }
   -
     name: IPV4SubnetMask
     get:
-      - { operation: "get", object: "IPV4SubnetMaskCurrentState", property: "value", parameter: "ipv4subnetmask" }
+      - { operation: "get", deviceResource: "IPV4SubnetMaskCurrentState", property: "value", parameter: "ipv4subnetmask" }
   -
     name: IPV4GatewayAddress
     get:
-      - { operation: "get", object: "IPV4GatewayAddressCurrentState", property: "value", parameter: "ipv4gatewayaddress" }
+      - { operation: "get", deviceResource: "IPV4GatewayAddressCurrentState", property: "value", parameter: "ipv4gatewayaddress" }
 
-commands:
+coreCommands:
 
   -
     name: PowerCyclePorts

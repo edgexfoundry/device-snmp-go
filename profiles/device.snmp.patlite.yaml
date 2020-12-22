@@ -139,53 +139,53 @@ deviceResources:
       units:
         { type: "String", readWrite: "R", defaultValue: "Enabled/Disabled"}
 
-resources:
+deviceCommands:
   -
     name: RedLight
     get:
-      - { operation: "get", object: "RedLightCurrentState", parameter: "RedLightControlState", property: "value" }
+      - { operation: "get", deviceResource: "RedLightCurrentState", parameter: "RedLightControlState", property: "value" }
 
     set:
-      - { index: "1", operation: "set", object: "RedLightControlState", property: "value", parameter: "RedLightControlState" }
-      - { index: "2", operation: "set", object: "RedLightTimer", property: "value", parameter: "RedLightTimer"}
+      - { index: "1", operation: "set", deviceResource: "RedLightControlState", property: "value", parameter: "RedLightControlState" }
+      - { index: "2", operation: "set", deviceResource: "RedLightTimer", property: "value", parameter: "RedLightTimer"}
 
   -
     name: GreenLight
     get:
-      - { operation: "get", object: "GreenLightCurrentState", parameter: "GreenLightControlState", property: "value" }
+      - { operation: "get", deviceResource: "GreenLightCurrentState", parameter: "GreenLightControlState", property: "value" }
 
     set:
-      - { index: "1", operation: "set", object: "GreenLightControlState", property: "value", parameter: "GreenLightControlState" }
-      - { index: "2", operation: "set", object: "GreenLightTimer", property: "value", parameter: "GreenLightTimer"}
+      - { index: "1", operation: "set", deviceResource: "GreenLightControlState", property: "value", parameter: "GreenLightControlState" }
+      - { index: "2", operation: "set", deviceResource: "GreenLightTimer", property: "value", parameter: "GreenLightTimer"}
   -
     name: AmberLight
     get:
-      - { operation: "get", object: "AmberLightCurrentState", parameter: "AmberLightControlState", property: "value" }
+      - { operation: "get", deviceResource: "AmberLightCurrentState", parameter: "AmberLightControlState", property: "value" }
 
     set:
-      - { index: "1", operation: "set", object: "AmberLightControlState", property: "value", parameter: "AmberLightControlState" }
-      - { index: "2", operation: "set", object: "AmberLightTimer", property: "value", parameter: "AmberLightTimer"}
+      - { index: "1", operation: "set", deviceResource: "AmberLightControlState", property: "value", parameter: "AmberLightControlState" }
+      - { index: "2", operation: "set", deviceResource: "AmberLightTimer", property: "value", parameter: "AmberLightTimer"}
 
   -
     name: Buzzer
     get:
-      - { operation: "get", object: "BuzzerCurrentState", parameter: "BuzzerControlState", property: "value" }
+      - { operation: "get", deviceResource: "BuzzerCurrentState", parameter: "BuzzerControlState", property: "value" }
 
     set:
-      - { index: "1", operation: "set", object: "BuzzerControlState", property: "value", parameter: "BuzzerControlState" }
-      - { index: "2", operation: "set", object: "BuzzerTimer", property: "value", parameter: "BuzzerTimer"}
+      - { index: "1", operation: "set", deviceResource: "BuzzerControlState", property: "value", parameter: "BuzzerControlState" }
+      - { index: "2", operation: "set", deviceResource: "BuzzerTimer", property: "value", parameter: "BuzzerTimer"}
 
 
   -
     name: AllLights
     get:
-      - { index: "1", operation: "get", object: "RedLightCurrentState", parameter: "RedLightControlState", property: "value" }
-      - { index: "2", operation: "get", object: "GreenLightCurrentState", parameter: "GreenLightControlState", property: "value" }
-      - { index: "3", operation: "get", object: "AmberLightCurrentState", parameter: "AmberLightControlState", property: "value" }
-      - { index: "4", operation: "get", object: "BuzzerCurrentState", parameter: "BuzzerControlState", property: "value" }
+      - { index: "1", operation: "get", deviceResource: "RedLightCurrentState", parameter: "RedLightControlState", property: "value" }
+      - { index: "2", operation: "get", deviceResource: "GreenLightCurrentState", parameter: "GreenLightControlState", property: "value" }
+      - { index: "3", operation: "get", deviceResource: "AmberLightCurrentState", parameter: "AmberLightControlState", property: "value" }
+      - { index: "4", operation: "get", deviceResource: "BuzzerCurrentState", parameter: "BuzzerControlState", property: "value" }
 
 
-commands:
+coreCommands:
   -
     name: AllLights
     get:
@@ -308,3 +308,4 @@ commands:
           code: "503"
           description: "service unavailable"
           expectedValues: []
+
