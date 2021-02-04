@@ -31,11 +31,6 @@ Type = 'consul'
   Host = 'localhost'
   Port = 48081
 
-  [Clients.Logging]
-  Protocol = 'http'
-  Host = 'localhost'
-  Port = 48061
-
 [Device]
   DataTransform = true
   InitCmd = ''
@@ -46,10 +41,6 @@ Type = 'consul'
   RemoveCmdArgs = ''
   ProfilesDir = './res'
   UpdateLastConnected = false
-
-[Logging]
-EnableRemote = false
-File = ''
 
 # Pre-define Devices
 # NOTE: You will need to modify the Address to a DNS or named resource potentially.
