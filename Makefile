@@ -41,6 +41,6 @@ docker: $(DOCKERS)
 docker_device_snmp_go:
 	docker build \
 		--label "git_sha=$(GIT_SHA)" \
-		-t edgexfoundry/docker-device-snmp-go:$(GIT_SHA) \
-		-t edgexfoundry/docker-device-snmp-go:$(VERSION)-dev \
+		-t edgexfoundry/device-snmp:$(GIT_SHA) \
+		-t edgexfoundry/device-snmp:$(VERSION)-dev \
 		.
