@@ -1,0 +1,167 @@
+name: "dellswitch"
+manufacturer: "Dell/EMC"
+model: "N1108P-ON"
+labels:
+  - "poe switch"
+  - "edge switch"
+  - "poe"
+description: "Dell N-Series Powered Switch accessed via SNMP"
+deviceResources:
+  -
+    # POE ONLY AVAILABLE ON PORTS 1-4
+    name: RebootCurrentStatePort1
+    description: "PowerAdminEnable Port 1"
+    attributes:
+      { oid: "1.3.6.1.2.1.105.1.1.1.3.1.1", community: "private", size: "4" }
+    properties:
+      valueType: "Int32"
+      readWrite: "RW"
+      minimum: "1"
+      maximum: "2"
+      defaultValue: "1"
+  -
+    name: RebootCurrentStatePort2
+    description: "PowerAdminEnable Port 2"
+    attributes:
+      { oid: "1.3.6.1.2.1.105.1.1.1.3.1.2", community: "private", size: "4" }
+    properties:
+      valueType: "Int32"
+      readWrite: "RW"
+      minimum: "1"
+      maximum: "2"
+      defaultValue: "1"
+  -
+    name: RebootCurrentStatePort3
+    description: "PowerAdminEnable Port 3"
+    attributes:
+      { oid: "1.3.6.1.2.1.105.1.1.1.3.1.3", community: "private", size: "4" }
+    properties:
+      valueType: "Int32"
+      readWrite: "RW"
+      minimum: "1"
+      maximum: "2"
+      defaultValue: "1"
+  -
+    name: RebootCurrentStatePort4
+    description: "PowerAdminEnable Port 4"
+    attributes:
+      { oid: "1.3.6.1.2.1.105.1.1.1.3.1.4", community: "private", size: "4" }
+    properties:
+      valueType: "Int32"
+      readWrite: "RW"
+      minimum: "1"
+      maximum: "2"
+      defaultValue: "1"
+  -
+    name: UpTimeCurrentState
+    description: "Switch uptime control state"
+    attributes:
+      { oid: "1.3.6.1.2.1.1.3.0", community: "private" }
+    properties:
+      valueType: "Uint64"
+      readWrite: "RW"
+      minimum: "0"
+      maximum: "18446744073709551615"
+      defaultValue: "0"
+  -
+    name: MacAddressCurrentState
+    description: "Switch Mac address"
+    attributes:
+      { oid: "1.3.6.1.2.1.17.1.1.0", community: "private" }
+    properties:
+      valueType: "String"
+      readWrite: "R"
+  -
+    name: FirmwareCurrentState
+    description: "Switch firmware version"
+    attributes:
+      { oid: "1.3.6.1.4.1.674.10895.3000.1.2.100.4.0", community: "private" }
+    properties:
+      valueType: "String"
+      readWrite: "R"
+  -
+    name: IPV4AddressCurrentState
+    description: "Switch IPV4 address"
+    attributes:
+      { oid: "1.3.6.1.4.1.674.10895.5000.2.6132.1.1.1.2.3.1.0", community: "private" }
+    properties:
+      valueType: "String"
+      readWrite: "R"
+  -
+    name: IPV4SubnetMaskCurrentState
+    description: "Switch IPV4 subnet mask"
+    attributes:
+      { oid: "1.3.6.1.4.1.674.10895.5000.2.6132.1.1.1.2.3.2.0", community: "private" }
+    properties:
+      valueType: "String"
+      readWrite: "R"
+  -
+    name: IPV4GatewayAddressCurrentState
+    description: "Switch IPV4 gateway address"
+    attributes:
+      { oid: "1.3.6.1.2.1.4.21.1.7.0.0.0.0", community: "private" }
+    properties:
+      valueType: "String"
+      readWrite: "R"
+
+deviceCommands:
+  -
+    #POE POWER only available on PORTS 1-4
+    # 1 = "ON"  2 - "OFF"
+    name: PowerCyclePorts
+    readWrite: "W"
+    resourceOperations:
+      - { deviceResource: "RebootCurrentStatePort1" }
+      - { deviceResource: "RebootCurrentStatePort2" }
+      - { deviceResource: "RebootCurrentStatePort3" }
+      - { deviceResource: "RebootCurrentStatePort4" }
+  -
+    name: PowerPort1
+    readWrite: "W"
+    resourceOperations:
+      - { deviceResource: "RebootCurrentStatePort1" }
+  -
+    name: PowerPort2
+    readWrite: "W"
+    resourceOperations:
+      - { deviceResource: "RebootCurrentStatePort2" }
+  -
+    name: PowerPort3
+    readWrite: "W"
+    resourceOperations:
+      - { deviceResource: "RebootCurrentStatePort3" }
+  -
+    name: PowerPort4
+    readWrite: "W"
+    resourceOperations:
+      - { deviceResource: "RebootCurrentStatePort4" }
+  -
+    name: Uptime
+    readWrite: "R"
+    resourceOperations:
+      - { deviceResource: "UpTimeCurrentState" }
+  -
+    name: MacAddress
+    readWrite: "R"
+    resourceOperations:
+      - { deviceResource: "MacAddressCurrentState" }
+  -
+    name: Firmware
+    readWrite: "R"
+    resourceOperations:
+      - { deviceResource: "FirmwareCurrentState" }
+  -
+    name: IPV4Address
+    readWrite: "R"
+    resourceOperations:
+      - { deviceResource: "IPV4AddressCurrentState" }
+  -
+    name: IPV4SubnetMask
+    readWrite: "R"
+    resourceOperations:
+      - { deviceResource: "IPV4SubnetMaskCurrentState" }
+  -
+    name: IPV4GatewayAddress
+    readWrite: "R"
+    resourceOperations:
+      - { deviceResource: "IPV4GatewayAddressCurrentState" }

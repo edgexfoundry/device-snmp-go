@@ -7,7 +7,8 @@
 package main
 
 import (
-	"github.com/edgexfoundry/device-sdk-go/pkg/startup"
+	"github.com/edgexfoundry/device-sdk-go/v2/pkg/startup"
+
 	"github.com/edgexfoundry/device-snmp-go/internal/driver"
 )
 

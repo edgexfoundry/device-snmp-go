@@ -9,6 +9,7 @@ package driver
 import (
 	"errors"
 	"fmt"
+
 	g "github.com/soniah/gosnmp"
 )
 
