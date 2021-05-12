@@ -6,4 +6,4 @@ require (
 	github.com/soniah/gosnmp v1.21.0
 )
 
-go 1.15
+go 1.16
