@@ -3,7 +3,7 @@
 GO=CGO_ENABLED=0 GO111MODULE=on go
 GOCGO=CGO_ENABLED=1 GO111MODULE=on go
 
-MICROSERVICES=cmd/device-snmp-go
+MICROSERVICES=cmd/device-snmp
 
 .PHONY: $(MICROSERVICES)
 
@@ -16,7 +16,7 @@ GOFLAGS=-ldflags "-X github.com/edgexfoundry/device-snmp-go.Version=$(VERSION)"
 
 build: $(MICROSERVICES)
 
-cmd/device-snmp-go:
+cmd/device-snmp:
 	go mod tidy
 	$(GOCGO) build $(GOFLAGS) -o $@ ./cmd
 
@@ -27,7 +27,6 @@ test:
 	gofmt -l .
 	[ "`gofmt -l .`" = "" ]
 	./bin/test-attribution-txt.sh
-	./bin/test-go-mod-tidy.sh
 
 clean:
 	rm -f $(MICROSERVICES)

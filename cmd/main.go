@@ -14,7 +14,7 @@ import (
 
 const (
 	version     string = "1.0.0"
-	serviceName string = "device-snmp-go"
+	serviceName string = "device-snmp"
 )
 
 func main() {

@@ -45,5 +45,5 @@ COPY --from=builder /device-snmp-go/LICENSE /
 EXPOSE 49993
 EXPOSE 161
 
-ENTRYPOINT ["/device-snmp-go"]
+ENTRYPOINT ["/device-snmp"]
 CMD ["--cp=consul.http://edgex-core-consul:8500", "--confdir=/res", "--registry"]
