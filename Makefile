@@ -1,8 +1,9 @@
 .PHONY: build test clean prepare update docker
 
-GO = CGO_ENABLED=0 GO111MODULE=on go
+GO=CGO_ENABLED=0 GO111MODULE=on go
+GOCGO=CGO_ENABLED=1 GO111MODULE=on go
 
-MICROSERVICES=cmd/device-snmp-go
+MICROSERVICES=cmd/device-snmp
 
 .PHONY: $(MICROSERVICES)
 
@@ -14,18 +15,18 @@ GIT_SHA=$(shell git rev-parse HEAD)
 GOFLAGS=-ldflags "-X github.com/edgexfoundry/device-snmp-go.Version=$(VERSION)"
 
 build: $(MICROSERVICES)
-	$(GO) build ./...
 
-cmd/device-snmp-go:
-	$(GO) build $(GOFLAGS) -o $@ ./cmd
+cmd/device-snmp:
+	go mod tidy
+	$(GOCGO) build $(GOFLAGS) -o $@ ./cmd
 
 test:
-	$(GO) test ./... -coverprofile=coverage.out
-	$(GO) vet ./...
+	go mod tidy
+	$(GOCGO) test ./... -coverprofile=coverage.out
+	$(GOCGO) vet ./...
 	gofmt -l .
 	[ "`gofmt -l .`" = "" ]
 	./bin/test-attribution-txt.sh
-	./bin/test-go-mod-tidy.sh
 
 clean:
 	rm -f $(MICROSERVICES)

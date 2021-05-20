@@ -1,5 +1,12 @@
 [Writable]
 LogLevel = 'INFO'
+  # InsecureSecrets are required for when Redis is used for message bus
+  [Writable.InsecureSecrets]
+    [Writable.InsecureSecrets.DB]
+    path = "redisdb"
+      [Writable.InsecureSecrets.DB.Secrets]
+      username = ""
+      password = ""
 
 [Service]
 BootTimeout = 30000
@@ -10,10 +17,11 @@ Port = 49993
 Protocol = 'http'
 StartupMsg = 'device snmp GO started'
 Timeout = 5000
-ConnectRetries = 10
 Labels = []
 EnableAsyncReadings = true
 AsyncBufferSize = 16
+MaxRequestSize = 0
+UseMessageBus = false
 
 [Registry]
 Host = 'localhost'
@@ -21,48 +29,62 @@ Port = 8500
 Type = 'consul'
 
 [Clients]
-  [Clients.Data]
+  [Clients.core-data]
   Protocol = 'http'
   Host = 'localhost'
   Port = 48080
 
-  [Clients.Metadata]
+  [Clients.core-metadata]
   Protocol = 'http'
   Host = 'localhost'
   Port = 48081
 
-[Device]
-  DataTransform = true
-  InitCmd = ''
-  InitCmdArgs = ''
-  MaxCmdOps = 128
-  MaxCmdValueLen = 256
-  RemoveCmd = ''
-  RemoveCmdArgs = ''
-  ProfilesDir = './res'
-  UpdateLastConnected = false
+[MessageQueue]
+Protocol = 'redis'
+Host = 'localhost'
+Port = 6379
+Type = 'redis'
+AuthMode = 'usernamepassword'  # required for redis messagebus (secure or insecure).
+SecretName = "redisdb"
+PublishTopicPrefix = 'edgex/events' # /<device-profile-name>/<device-name>/<source-name> will be added to this Publish Topic prefix
+  [MessageQueue.Optional]
+  # Default MQTT Specific options that need to be here to enable environment variable overrides of them
+  # Client Identifiers
+  ClientId = "device-snmp"
+  # Connection information
+  Qos = "0" # Quality of Sevice values are 0 (At most once), 1 (At least once) or 2 (Exactly once)
+  KeepAlive = "10" # Seconds (must be 2 or greater)
+  Retained = "false"
+  AutoReconnect = "true"
+  ConnectTimeout = "5" # Seconds
+  SkipCertVerify = "false" # Only used if Cert/Key file or Cert/Key PEMblock are specified
 
-# Pre-define Devices
-# NOTE: You will need to modify the Address to a DNS or named resource potentially.
-#       Port 161 is the default SNMP provider port.
-[[DeviceList]]
-  Name = 'trendnet01'
-  Profile = 'trendnet'
-  Description = 'Switch SNMP service interface'
-  Labels = [ 'device-snmp-switch-example' ]
-  [DeviceList.Protocols]
-    [DeviceList.Protocols.TCP]
-    Address = '192.168.10.200'
-    Port = '161'
-  [[DeviceList.AutoEvents]]
-    Frequency = '10s'
-    OnChange = true
-    Resource = 'MacAddress'
-  [[DeviceList.AutoEvents]]
-    Frequency = '15s'
-    OnChange = true
-    Resource = 'Firmware'
-  [[DeviceList.AutoEvents]]
-    Frequency = '5s'
-    OnChange = false
-    Resource = 'Uptime'
+# Only used when EDGEX_SECURITY_SECRET_STORE=true which is now required for secure consul
+[SecretStore]
+Type = 'vault'
+Host = 'localhost'
+Port = 8200
+Path = '/v1/secret/edgex/device-snmp/'
+Protocol = 'http'
+RootCaCertPath = ''
+ServerName = ''
+TokenFile = '/tmp/edgex/secrets/device-snmp/secrets-token.json'
+AdditionalRetryAttempts = 10
+RetryWaitPeriod = "1s"
+  [SecretStore.Authentication]
+  AuthType = 'X-Vault-Token'
+
+[Device]
+DataTransform = true
+InitCmd = ''
+InitCmdArgs = ''
+MaxCmdOps = 128
+MaxCmdValueLen = 256
+RemoveCmd = ''
+RemoveCmdArgs = ''
+ProfilesDir = './res'
+DevicesDir = './res'
+UpdateLastConnected = false
+  [Device.Discovery]
+  Enabled = false
+  Interval = '30s'
