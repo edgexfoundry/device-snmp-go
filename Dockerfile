@@ -42,7 +42,7 @@ COPY --from=builder /device-snmp-go/cmd /
 COPY --from=builder /device-snmp-go/Attribution.txt /
 COPY --from=builder /device-snmp-go/LICENSE /
 
-EXPOSE 49993
+EXPOSE 59993
 EXPOSE 161
 
 ENTRYPOINT ["/device-snmp"]
