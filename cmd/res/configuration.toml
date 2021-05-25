@@ -9,19 +9,14 @@ LogLevel = 'INFO'
       password = ""
 
 [Service]
-BootTimeout = 30000
-CheckInterval = '10s'
+HealthCheckInterval = '10s'
 Host = 'localhost'
-ServerBindAddr = ''  # blank value defaults to Service.Host value
 Port = 59993
-Protocol = 'http'
-StartupMsg = 'device snmp GO started'
-Timeout = 5000
-Labels = []
-EnableAsyncReadings = true
-AsyncBufferSize = 16
-MaxRequestSize = 0
-UseMessageBus = false
+ServerBindAddr = ''  # blank value defaults to Service.Host value
+StartupMsg = 'device snmp started'
+# MaxRequestSize limit the request body size in byte of put command
+MaxRequestSize = 0 # value 0 unlimit the request size.
+RequestTimeout = '5s'
 
 [Registry]
 Host = 'localhost'
@@ -85,6 +80,10 @@ RemoveCmdArgs = ''
 ProfilesDir = './res'
 DevicesDir = './res'
 UpdateLastConnected = false
+Labels = []
+EnableAsyncReadings = true
+AsyncBufferSize = 16
+UseMessageBus = false
   [Device.Discovery]
   Enabled = false
   Interval = '30s'
