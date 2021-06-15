@@ -14,8 +14,8 @@ import (
 
 	dsModels "github.com/edgexfoundry/device-sdk-go/v2/pkg/models"
 	"github.com/edgexfoundry/go-mod-core-contracts/v2/clients/logger"
-	"github.com/edgexfoundry/go-mod-core-contracts/v2/v2"
-	"github.com/edgexfoundry/go-mod-core-contracts/v2/v2/models"
+	"github.com/edgexfoundry/go-mod-core-contracts/v2/common"
+	"github.com/edgexfoundry/go-mod-core-contracts/v2/models"
 )
 
 type SNMPDriver struct {
@@ -104,36 +104,36 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 
 		switch safeVal := val.(type) {
 		case string:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, v2.ValueTypeString, safeVal)
+			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeString, safeVal)
 			res = append(res, cv)
 		case int64:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, v2.ValueTypeInt64, safeVal)
+			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeInt64, safeVal)
 			res = append(res, cv)
 		case int32:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, v2.ValueTypeInt32, safeVal)
+			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeInt32, safeVal)
 			res = append(res, cv)
 		case int16:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, v2.ValueTypeInt16, safeVal)
+			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeInt16, safeVal)
 			res = append(res, cv)
 		case int8:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, v2.ValueTypeInt8, safeVal)
+			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeInt8, safeVal)
 			res = append(res, cv)
 		case uint64:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, v2.ValueTypeUint64, safeVal)
+			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeUint64, safeVal)
 			res = append(res, cv)
 		case uint32:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, v2.ValueTypeUint32, safeVal)
+			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeUint32, safeVal)
 			res = append(res, cv)
 		case uint16:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, v2.ValueTypeUint16, safeVal)
+			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeUint16, safeVal)
 			res = append(res, cv)
 		case uint8:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, v2.ValueTypeUint8, safeVal)
+			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeUint8, safeVal)
 			res = append(res, cv)
 		case uint:
 			trueVal, ok := val.(uint64) // Alt. non panicking version
 			if ok {
-				cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, v2.ValueTypeUint64, trueVal)
+				cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeUint64, trueVal)
 				res = append(res, cv)
 			} else {
 				s.lc.Errorf("SNMPDriver.HandleWriteCommands; %s", err)
@@ -141,7 +141,7 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 		default:
 			trueVal, ok := val.(int) // Alt. non panicking version
 			if ok {
-				cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, v2.ValueTypeInt32, int32(trueVal))
+				cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeInt32, int32(trueVal))
 				res = append(res, cv)
 			} else {
 				s.lc.Errorf("SNMPDriver.HandleWriteCommands; %s", err)
