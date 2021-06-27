@@ -4,16 +4,15 @@
 [Github repository](https://github.com/edgexfoundry/device-snmp-go)
 
 ## [v2.0.0] Ireland - 2021-06-30  (Not Compatible with 1.x releases)
+### Change Logs for EdgeX Dependencies
+- [device-sdk-go](https://github.com/edgexfoundry/device-sdk-go/blob/v2.0.0/CHANGELOG.md)
+- [go-mod-core-contracts](https://github.com/edgexfoundry/go-mod-core-contracts/blob/v2.0.0/CHANGELOG.md)
 
 ### Features ✨
 - Enable using MessageBus as the default ([#37e4736](https://github.com/edgexfoundry/device-snmp-go/commits/37e4736))
 - Remove Logging configuration ([#9643cb4](https://github.com/edgexfoundry/device-snmp-go/commits/9643cb4))
 ### Bug Fixes 🐛
-- Remove retry items of SecretStore config and update secret path     go-mod-bootstrap has implemented the addition of prefix /v1/secret/edgex/ for the Path property of SecretStore config section, so we just use the service specific secret path         in Toml files ([#51ad408](https://github.com/edgexfoundry/device-snmp-go/commits/51ad408))
-- **build:** update Dockerfiles to use go 1.16 ([#029de77](https://github.com/edgexfoundry/device-snmp-go/commits/029de77))
-- **build:** update go.mod to go 1.16 ([#1535d2d](https://github.com/edgexfoundry/device-snmp-go/commits/1535d2d))
 ### Code Refactoring ♻
-- bump dependency version and update import path ([#dbb4813](https://github.com/edgexfoundry/device-snmp-go/commits/dbb4813))
 - remove unimplemented InitCmd/RemoveCmd configuration ([#07622c1](https://github.com/edgexfoundry/device-snmp-go/commits/07622c1))
 - Change PublishTopicPrefix value to be 'edgex/events/device' ([#a95e588](https://github.com/edgexfoundry/device-snmp-go/commits/a95e588))
 - Update configuration for change to common ServiceInfo struct ([#47d5e2d](https://github.com/edgexfoundry/device-snmp-go/commits/47d5e2d))
@@ -32,6 +31,8 @@
 - Add badges to readme ([#e4f17ee](https://github.com/edgexfoundry/device-snmp-go/commits/e4f17ee))
 ### Build 👷
 - update build files for v2 ([#6247689](https://github.com/edgexfoundry/device-snmp-go/commits/6247689))
+- update Dockerfiles to use go 1.16 ([#029de77](https://github.com/edgexfoundry/device-snmp-go/commits/029de77))
+- update go.mod to go 1.16 ([#1535d2d](https://github.com/edgexfoundry/device-snmp-go/commits/1535d2d))
 ### Continuous Integration 🔄
 - update local docker image names ([#639fbe6](https://github.com/edgexfoundry/device-snmp-go/commits/639fbe6))
 
