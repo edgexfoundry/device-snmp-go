@@ -17,6 +17,5 @@ coverage.out
 vendor/
 cmd/device-snmp
 glide.lock
-go.sum
 
 VERSION

@@ -27,9 +27,7 @@ RUN apk add --update --no-cache ${ALPINE_PKG_BASE} ${ALPINE_PKG_EXTRA}
 WORKDIR /device-snmp-go
 
 COPY . .
-
-RUN go mod tidy
-RUN make update
+RUN [ ! -d "vendor" ] && go mod download all || echo "skipping..."
 
 RUN ${MAKE}
 
