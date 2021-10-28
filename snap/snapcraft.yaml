@@ -1,5 +1,5 @@
 name: edgex-device-snmp
-base: core18 
+base: core20 
 license: Apache-2.0
 adopt-info: device-snmp
 summary: Connect network switches to EdgeX using device-snmp 
@@ -85,17 +85,9 @@ parts:
       install -DT "./cmd/device-snmp" "$SNAPCRAFT_PART_INSTALL/bin/device-snmp"
       install -DT "./cmd/res/configuration.toml" "$SNAPCRAFT_PART_INSTALL/config/device-snmp/res/configuration.toml"
 
-      for fpath in ./cmd/res/devices/*.toml; do
-          fname=$(basename "$fpath")
-          install -DT "./cmd/res/devices/${fname}" \
-          "$SNAPCRAFT_PART_INSTALL/config/device-snmp/res/devices/${fname}"
-      done
-
-      for fpath in ./cmd/res/profiles/*.yaml; do
-          fname=$(basename "$fpath")
-          install -DT "./cmd/res/profiles/${fname}" \
-          "$SNAPCRAFT_PART_INSTALL/config/device-snmp/res/profiles/${fname}"
-      done       
+      # copy all config files
+      mkdir -p $SNAPCRAFT_PART_INSTALL/config/device-snmp
+      cp -rv cmd/res $SNAPCRAFT_PART_INSTALL/config/device-snmp/res
 
       install -DT "./Attribution.txt" \
          "$SNAPCRAFT_PART_INSTALL/usr/share/doc/device-snmp/Attribution.txt"

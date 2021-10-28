@@ -1,4 +1,3 @@
-GO=GO111MODULE=on go
 HOOKS=cmd/configure/configure cmd/install/install
 
 tidy:
