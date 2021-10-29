@@ -4,6 +4,7 @@ require (
 	github.com/edgexfoundry/device-sdk-go/v2 v2.0.0
 	github.com/edgexfoundry/go-mod-core-contracts/v2 v2.0.0
 	github.com/soniah/gosnmp v1.21.0
+	golang.org/x/tools v0.1.7 // indirect
 )
 
 go 1.16
