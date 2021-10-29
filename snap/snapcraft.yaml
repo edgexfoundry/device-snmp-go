@@ -83,11 +83,12 @@ parts:
       make build
 
       install -DT "./cmd/device-snmp" "$SNAPCRAFT_PART_INSTALL/bin/device-snmp"
-      install -DT "./cmd/res/configuration.toml" "$SNAPCRAFT_PART_INSTALL/config/device-snmp/res/configuration.toml"
 
       # copy all config files
-      mkdir -p $SNAPCRAFT_PART_INSTALL/config/device-snmp
-      cp -rv cmd/res $SNAPCRAFT_PART_INSTALL/config/device-snmp/res
+      mkdir -p $SNAPCRAFT_PART_INSTALL/config/device-snmp/res
+      cp -rv cmd/res/configuration.toml $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/configuration.toml 
+      cp -rv cmd/res/devices $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/devices     
+      cp -rv cmd/res/profiles $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/profiles      
 
       install -DT "./Attribution.txt" \
          "$SNAPCRAFT_PART_INSTALL/usr/share/doc/device-snmp/Attribution.txt"
