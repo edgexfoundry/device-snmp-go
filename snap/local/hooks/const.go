@@ -50,4 +50,3 @@ var ConfToEnv = map[string]string{
 	"device.update-last-connected": "DEVICE_UPDATELASTCONNECTED",
 	"device.use-message-bus":       "DEVICE_USEMESSAGEBUS",
 }
-
