@@ -27,25 +27,6 @@ package hooks
 // env.<section>.<keyname>
 //
 var ConfToEnv = map[string]string{
-	// [snmpBrokerInfo]
-	"snmpbrokerinfo.schema":     "snmpBROKERINFO_SCHEMA",
-	"snmpbrokerinfo.host":       "snmpBROKERINFO_HOST",
-	"snmpbrokerinfo.port":       "snmpBROKERINFO_PORT",
-	"snmpbrokerinfo.qos":        "snmpBROKERINFO_QOS",
-	"snmpbrokerinfo.keep-alive": "snmpBROKERINFO_KEEPALIVE",
-	"snmpbrokerinfo.client-id":  "snmpBROKERINFO_CLIENTID",
-
-	"snmpbrokerinfo.credentials-retry-time":  "snmpBROKERINFO_CREDENTIALSRETRYTIME",
-	"snmpbrokerinfo.credentials-retry-wait":  "snmpBROKERINFO_CREDENTIALSRETRYWAIT",
-	"snmpbrokerinfo.conn-establishing-retry": "snmpBROKERINFO_CONNESTABLISHINGRETRY",
-	"snmpbrokerinfo.conn-retry-wait-time":    "snmpBROKERINFO_CONNRETRYWAITTIME",
-
-	"snmpbrokerinfo.auth-mode":        "snmpBROKERINFO_AUTHMODE",
-	"snmpbrokerinfo.credentials-path": "snmpBROKERINFO_CREDENTIALSPATH",
-
-	"snmpbrokerinfo.incoming-topic": "snmpBROKERINFO_INCOMINGTOPIC",
-	"snmpbrokerinfo.response-topic": "snmpBROKERINFO_RESPONSETOPIC",
-
 	// [Device]
 	"device.update-last-connected": "DEVICE_UPDATELASTCONNECTED",
 	"device.use-message-bus":       "DEVICE_USEMESSAGEBUS",
