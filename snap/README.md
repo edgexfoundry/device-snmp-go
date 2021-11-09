@@ -70,16 +70,19 @@ $ sudo snap start --enable edgex-device-snmp.device-snmp
 
 ### Using a content interface to set device configuration
 
-The `device-config` content interface allows another snap to seed this device snap with both a configuration file and one or more device profiles.
+The `device-config` content interface allows another snap to seed this device
+snap with configuration files under the `$SNAP_DATA/config/device-snmp/res` directory.
 
-To use, create a new snap with a directory containing the configuration and device profile files. Your snapcraft.yaml file then needs to define a slot with read access to the directory you are sharing.
+Note that the `device-config` content interface does NOT support seeding of the Secret Store Token because that file is expected at a different path.
+
+To use, create a new snap with a directory containing the configuration files. Your snapcraft.yaml file then needs to define a slot with read access to the directory you are sharing.
 
 ```
 slots:
   device-config:
     interface: content  
     content: device-config
-    write: 
+    read: 
       - $SNAP/config
 ```
 
@@ -91,7 +94,7 @@ Then connect the plug in the device snap to the slot in your snap, which will re
 $ sudo snap connect edgex-device-snmp:device-config your-snap:device-config
 ```
 
-This needs to be done before the device service is started for the first time. Once you have set the configuration the device service can be started and it will then be configurated using the settings you provided:
+This needs to be done before the device service is started for the first time. Once you have set the configuration the device service can be started and it will then be configured using the settings you provided:
 
 ```
 $ sudo snap start edgex-device-snmp.device-snmp
@@ -139,12 +142,10 @@ $ sudo snap restart edgex-device-snmp.device-snmp
 
 ```
 [Service]
-service.boot-timeout            // Service.BootTimeout
 service.health-check-interval   // Service.HealthCheckInterval
 service.host                    // Service.Host
 service.server-bind-addr        // Service.ServerBindAddr
 service.port                    // Service.Port
-service.protocol                // Service.Protocol
 service.max-result-count        // Service.MaxResultCount
 service.max-request-size        // Service.MaxRequestSize
 service.startup-msg             // Service.StartupMsg
