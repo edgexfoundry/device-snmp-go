@@ -42,8 +42,7 @@ apps:
       SECRETSTORE_TOKENFILE: $SNAP_DATA/device-snmp/secrets-token.json
       WRITABLE_LOGLEVEL: 'INFO'
     daemon: simple
-    passthrough:
-      install-mode: disable
+    install-mode: disable
     plugs: [network, network-bind]
 
 plugs:
