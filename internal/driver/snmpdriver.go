@@ -63,8 +63,8 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 
 	//s.lc.Debug(fmt.Sprintf("SimpleDriver.HandleReadCommands: protocols: %v operation: %v attributes: %v", protocols, reqs[0].RO.Operation, reqs[0].DeviceResource.Attributes))
 
-	s.lc.Debug("Port %s", Port)
-	s.lc.Debug("Address", Address)
+	s.lc.Debugf("Port %s", Port)
+	s.lc.Debugf("Address %s", Address)
 
 	var commands []DeviceCommand
 	for _, req := range reqs {
