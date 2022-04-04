@@ -22,7 +22,6 @@ tidy:
 build: $(MICROSERVICES)
 
 cmd/device-snmp:
-	go mod tidy
 	$(GOCGO) build $(GOFLAGS) -o $@ ./cmd
 
 unittest:
@@ -34,8 +33,8 @@ lint:
 
 test: unittest lint
 	$(GOCGO) vet ./...
-	gofmt -l .
-	[ "`gofmt -l .`" = "" ]
+	gofmt -l $$(find . -type f -name '*.go'| grep -v "/vendor/")
+	[ "`gofmt -l $$(find . -type f -name '*.go'| grep -v "/vendor/")`" = "" ]
 	./bin/test-attribution-txt.sh
 
 clean:
@@ -55,3 +54,6 @@ docker_device_snmp_go:
 		-t edgexfoundry/device-snmp:$(GIT_SHA) \
 		-t edgexfoundry/device-snmp:$(VERSION)-dev \
 		.
+
+vendor:
+	$(GO) mod vendor

@@ -1,0 +1,101 @@
+name: edgex-device-snmp
+base: core20 
+license: Apache-2.0
+adopt-info: device-snmp
+summary: Connect network switches to EdgeX using device-snmp 
+title: EdgeX snmp Device Service
+description: |
+  This device service provides network switches configuration, sending and 
+  receiving event readings from switches. Currently, this device service 
+  is tailored specifically to the TrendNET TEG-082WS switch.
+
+# TODO: add armhf when the project supports this
+architectures:
+  - build-on: amd64
+  - build-on: arm64
+
+grade: stable
+confinement: strict
+
+icon: snap/local/assets/edgex-snap-icon.png
+
+# edinburgh, geneva,hanoi = 1, ireland,jakarta = 2
+epoch: 2
+
+slots:
+  edgex-secretstore-token:
+    interface: content
+    content: edgex-secretstore-token
+    source:
+      write: [$SNAP_DATA/device-snmp]
+
+apps:
+  device-snmp:
+    adapter: full
+    command: bin/device-snmp -confdir $SNAP_DATA/config/device-snmp -profile res --registry $CONSUL_ADDR
+    command-chain:
+      - bin/startup-env-var.sh
+    environment:
+      CONSUL_ADDR: "consul://localhost:8500"
+      DEVICE_PROFILESDIR: $SNAP_DATA/config/device-snmp/res/profiles
+      DEVICE_DEVICESDIR: $SNAP_DATA/config/device-snmp/res/devices
+      SECRETSTORE_TOKENFILE: $SNAP_DATA/device-snmp/secrets-token.json
+      WRITABLE_LOGLEVEL: 'INFO'
+    daemon: simple
+    install-mode: disable
+    plugs: [network, network-bind]
+
+plugs:
+  device-config:
+    interface: content
+    target: $SNAP_DATA/config/device-snmp
+
+parts:
+  hooks:
+    source: snap/local/hooks
+    plugin: make
+    build-snaps: [go/1.17/stable]
+    override-build: |
+      cd $SNAPCRAFT_PART_SRC
+      make build
+      install -DT ./cmd/configure/configure $SNAPCRAFT_PART_INSTALL/snap/hooks/configure
+      install -DT ./cmd/install/install $SNAPCRAFT_PART_INSTALL/snap/hooks/install
+
+  device-snmp:
+    source: .
+    plugin: make
+    build-packages: [git, libzmq3-dev, zip, pkg-config]
+    stage-packages: [libzmq5]
+    build-snaps:
+      - go/1.17/stable
+    override-build: |
+      cd $SNAPCRAFT_PART_SRC
+
+      GIT_VERSION=$(git describe --tags --abbrev=0 | sed 's/v//')
+      if [ -z "$GIT_VERSION" ]; then
+        GIT_VERSION="0.0.0"
+      fi
+      snapcraftctl set-version ${GIT_VERSION}
+      # this is needed for make build
+      echo $GIT_VERSION > ./VERSION
+
+      go mod tidy
+      make build
+
+      install -DT "./cmd/device-snmp" "$SNAPCRAFT_PART_INSTALL/bin/device-snmp"
+
+      # copy all config files
+      mkdir -p $SNAPCRAFT_PART_INSTALL/config/device-snmp/res
+      cp -rv cmd/res/configuration.toml $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/configuration.toml 
+      cp -rv cmd/res/devices $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/devices     
+      cp -rv cmd/res/profiles $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/profiles      
+
+      install -DT "./Attribution.txt" \
+         "$SNAPCRAFT_PART_INSTALL/usr/share/doc/device-snmp/Attribution.txt"
+      install -DT "./LICENSE" \
+         "$SNAPCRAFT_PART_INSTALL/usr/share/doc/device-snmp/LICENSE"
+
+  config-common:
+    plugin: dump
+    source: snap/local/runtime-helpers
+
