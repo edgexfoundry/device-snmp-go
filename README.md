@@ -6,8 +6,8 @@
 A generic SNMP device service. Included is a sample for a network switch device driver. Additionally, a Patlite profile is included in the profiles director. 
 
 This device service facilitates via the configuration, accessing the TrendNet TEG-082WS 10 port switch.
-You can send and receive event readings from the network switch.  Currently this device service is tailored specifically to the TrendNET TEG-082WS switch but refactoring could take place to abstract the device type and provde a myrida of device profiles. You would need to interogate the network switch and then determine the appropriate device profile.   This particular device service uses the SNMP (Simple Netowrk Management Protocol).
-SNMP communication with the switch permits the device service to create events based on the Network Switch data. For further information on the Simple Network Mangement Protocol [`SNMP Wiki`][ExWk]
+You can send and receive event readings from the network switch.  Currently this device service is tailored specifically to the TrendNET TEG-082WS switch but refactoring could take place to abstract the device type and provde a myrida of device profiles. You would need to interrogate the network switch and then determine the appropriate device profile.   This particular device service uses the SNMP (Simple Network Management Protocol).
+SNMP communication with the switch permits the device service to create events based on the Network Switch data. For further information on the Simple Network Management Protocol [`SNMP Wiki`][ExWk]
 
 #### TODOS
 > Async callbacks not supported
@@ -20,8 +20,8 @@ SNMP communication with the switch permits the device service to create events b
 device-snmp-go requires [Go](https://golang.org/dl/) language. Download the current release if you don't have it already.
 Have access to the  [`EdgeX Foundry`](https://github.com/edgexfoundry) project github site.  
 
-### EdgeX-Go (The EdgeX Platform and Sevices)
-This service requires the EdgeX-Go platform and serveral of its services to be up and running if you want to test the device service full integration. 
+### EdgeX-Go (The EdgeX Platform and Services)
+This service requires the EdgeX-Go platform and several of its services to be up and running if you want to test the device service full integration. 
 However, you can run this service as a standalone with the following minium services up and running either a) natively (.exe) or b) as Docker image containers.
 
 Detailed instructions on how to use the various Edgex-Foundry service(s) are linked below.  
@@ -67,7 +67,7 @@ arp -a
 cheese.attlocal.net (192.168.1.69) [ethernet] ...
 ...
 ```
-This is the IP address you will substititue for localhost in the following commands. 
+This is the IP address you will substitute for localhost in the following commands. 
 Verify the deployment by navigating to your server address in your preferred browser or [`Postman`](https://www.getpostman.com/) REST test harness.
 Or you can use the curl command from your console if your on linux or OSX.  If you choose to use Postman just use the address less the curl command. 
 
