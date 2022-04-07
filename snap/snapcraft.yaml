@@ -1,15 +1,8 @@
 name: edgex-device-snmp
 base: core20 
 license: Apache-2.0
-adopt-info: device-snmp
-summary: Connect network switches to EdgeX using device-snmp 
-title: EdgeX snmp Device Service
-description: |
-  This device service provides network switches configuration, sending and 
-  receiving event readings from switches. Currently, this device service 
-  is tailored specifically to the TrendNET TEG-082WS switch.
+adopt-info: metadata
 
-# TODO: add armhf when the project supports this
 architectures:
   - build-on: amd64
   - build-on: arm64
@@ -17,9 +10,8 @@ architectures:
 grade: stable
 confinement: strict
 
-icon: snap/local/assets/edgex-snap-icon.png
-
-# edinburgh, geneva,hanoi = 1, ireland,jakarta = 2
+# 1: edinburgh, geneva, hanoi
+# 2: ireland, jakarta
 epoch: 2
 
 slots:
@@ -62,6 +54,7 @@ parts:
       install -DT ./cmd/install/install $SNAPCRAFT_PART_INSTALL/snap/hooks/install
 
   device-snmp:
+    after: [metadata]
     source: .
     plugin: make
     build-packages: [git, libzmq3-dev, zip, pkg-config]
@@ -71,13 +64,8 @@ parts:
     override-build: |
       cd $SNAPCRAFT_PART_SRC
 
-      GIT_VERSION=$(git describe --tags --abbrev=0 | sed 's/v//')
-      if [ -z "$GIT_VERSION" ]; then
-        GIT_VERSION="0.0.0"
-      fi
-      snapcraftctl set-version ${GIT_VERSION}
-      # this is needed for make build
-      echo $GIT_VERSION > ./VERSION
+      # the version is needed for the build
+      cat ./VERSION
 
       go mod tidy
       make build
@@ -99,3 +87,25 @@ parts:
     plugin: dump
     source: snap/local/runtime-helpers
 
+  metadata:
+    plugin: nil
+    source: https://github.com/canonical/edgex-snap-metadata.git
+    source-branch: appstream
+    source-depth: 1
+    override-build: |
+      # install the icon at the default internal path
+      install -DT edgex-snap-icon.png \
+        $SNAPCRAFT_PART_INSTALL/meta/gui/icon.png
+      # change to this project's repo to get the version
+      cd $SNAPCRAFT_PROJECT_DIR
+      if git describe ; then
+        VERSION=$(git describe --tags --abbrev=0 | sed 's/v//')
+      else
+        VERSION="0.0.0"
+      fi
+      
+      # write version to file for the build
+      echo $VERSION > ./VERSION
+      # set the version of this snap
+      snapcraftctl set-version $VERSION
+    parse-info: [edgex-device-snmp.metainfo.xml] 
