@@ -17,11 +17,11 @@ DIR=$PWD
 CMD=../cmd
 
 function cleanup {
-	pkill device-snmp-go
+	pkill device-snmp
 }
 
 cd $CMD
-exec -a device-snmp-go ./device-snmp-go &
+exec -a device-snmp ./device-snmp &
 cd $DIR
 
 
