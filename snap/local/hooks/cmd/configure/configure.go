@@ -24,6 +24,8 @@ import (
 	"strings"
 
 	hooks "github.com/canonical/edgex-snap-hooks/v2"
+	"github.com/canonical/edgex-snap-hooks/v2/log"
+	"github.com/canonical/edgex-snap-hooks/v2/options"
 	local "github.com/edgexfoundry/device-snmp-go/hooks"
 )
 
@@ -47,6 +49,12 @@ func main() {
 		fmt.Println(fmt.Sprintf("edgex-device-snmp:configure: initialization failure: %v", err))
 		os.Exit(1)
 
+	}
+
+	log.SetComponentName("configure")
+	if err := options.ProcessAppConfig("device-snmp"); err != nil {
+		hooks.Error(fmt.Sprintf("could not process options: %v", err))
+		os.Exit(1)
 	}
 
 	// read env var override configuration
