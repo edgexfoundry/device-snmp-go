@@ -19,9 +19,8 @@ import (
 )
 
 type SNMPDriver struct {
-	lc           logger.LoggingClient
-	asyncCh      chan<- *dsModels.AsyncValues
-	switchButton bool
+	lc      logger.LoggingClient
+	asyncCh chan<- *dsModels.AsyncValues
 }
 
 var client *SNMPClient
