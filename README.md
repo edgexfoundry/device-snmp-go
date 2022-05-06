@@ -14,6 +14,14 @@ SNMP communication with the switch permits the device service to create events b
 > SNMP Traps are currently not implemented but will be completed at a future date. 
 > Network Switch Type abstraction
 
+### Packaging
+
+This component is packaged as docker image and snap.
+
+For docker, please refer to the [Dockerfile](Dockerfile) and [Docker Compose Builder] scripts.
+
+For the snap, refer to the [snap](snap) directory.
+
 
 ### Pre-Requisites
 
@@ -154,3 +162,4 @@ in the directory the application is executed from. See [cmd/res/configuration.to
 [ExCc]: <https://github.com/edgexfoundry/edgex-go/tree/master/internal/core/command/README.md>
 [ExCm]: <https://github.com/edgexfoundry/edgex-go/tree/master/internal/core/metadata/README.md>
 [ExWk]: <https://en.wikipedia.org/wiki/Simple_Network_Management_Protocol>
+[Docker Compose Builder]: https://github.com/edgexfoundry/edgex-compose/tree/main/compose-builder
