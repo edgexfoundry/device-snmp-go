@@ -3,15 +3,34 @@
 ## EdgeX SNMP Device Service
 [Github repository](https://github.com/edgexfoundry/device-snmp-go)
 
-## [v2.0.0] Ireland - 2021-06-30  (Not Compatible with 1.x releases)
 ### Change Logs for EdgeX Dependencies
-- [device-sdk-go](https://github.com/edgexfoundry/device-sdk-go/blob/v2.0.0/CHANGELOG.md)
-- [go-mod-core-contracts](https://github.com/edgexfoundry/go-mod-core-contracts/blob/v2.0.0/CHANGELOG.md)
+- [device-sdk-go](https://github.com/edgexfoundry/device-sdk-go/blob/main/CHANGELOG.md)
+- [go-mod-core-contracts](https://github.com/edgexfoundry/go-mod-core-contracts/blob/main/CHANGELOG.md)
+- [go-mod-bootstrap](https://github.com/edgexfoundry/go-mod-bootstrap/blob/main/CHANGELOG.md)  (indirect dependency)
+- [go-mod-messaging](https://github.com/edgexfoundry/go-mod-messaging/blob/main/CHANGELOG.md) (indirect dependency)
+- [go-mod-registry](https://github.com/edgexfoundry/go-mod-registry/blob/main/CHANGELOG.md)  (indirect dependency)
+- [go-mod-secrets](https://github.com/edgexfoundry/go-mod-secrets/blob/main/CHANGELOG.md) (indirect dependency)
+- [go-mod-configuration](https://github.com/edgexfoundry/go-mod-configuration/blob/main/CHANGELOG.md) (indirect dependency)
+
+## [v2.0.0] Kamakura - 2022-05-11  (Not Compatible with 1.x releases)
+
+### Features ✨
+- Enable security hardening ([#8ca7183](https://github.com/edgexfoundry/device-snmp-go/commits/8ca7183))
+
+### Bug Fixes 🐛
+- **snap:** expose parent directory in device-config plug ([#e81302c](https://github.com/edgexfoundry/device-snmp-go/commits/e81302c))
+
+## [v2.1.0] Jakarta - 2021-11-18  (Not Compatible with 1.x releases)
+
+### Bug Fixes 🐛
+- update all TOML to use quote and not single-quote ([#0ee2e50](https://github.com/edgexfoundry/device-snmp-go/commits/0ee2e50))
+
+## [v2.0.0] Ireland - 2021-06-30  (Not Compatible with 1.x releases)
 
 ### Features ✨
 - Enable using MessageBus as the default ([#37e4736](https://github.com/edgexfoundry/device-snmp-go/commits/37e4736))
 - Remove Logging configuration ([#9643cb4](https://github.com/edgexfoundry/device-snmp-go/commits/9643cb4))
-### Bug Fixes 🐛
+
 ### Code Refactoring ♻
 - remove unimplemented InitCmd/RemoveCmd configuration ([#07622c1](https://github.com/edgexfoundry/device-snmp-go/commits/07622c1))
 - Change PublishTopicPrefix value to be 'edgex/events/device' ([#a95e588](https://github.com/edgexfoundry/device-snmp-go/commits/a95e588))
