@@ -18,12 +18,41 @@
 - Enable security hardening ([#8ca7183](https://github.com/edgexfoundry/device-snmp-go/commits/8ca7183))
 
 ### Bug Fixes 🐛
-- **snap:** expose parent directory in device-config plug ([#e81302c](https://github.com/edgexfoundry/device-snmp-go/commits/e81302c))
+- **snap:** expose parent directory in device-config plug ([#e81302c](https://github.com/edgexfoundry/device-snmp-go/commits/e81302c))### Code Refactoring â™»
+- **snap:** remove obsolete passthrough usage ([#42a8101](https://github.com/edgexfoundry/device-snmp-go/commits/42a8101))
+- **snap:** remove redundant content indentifier ([#3e246a5](https://github.com/edgexfoundry/device-snmp-go/commits/3e246a5))
+
+### Build 👷
+- Update to latest SDK w/o ZMQ on windows ([#c9dbc26](https://github.com/edgexfoundry/device-snmp-go/commits/c9dbc26))
+    ```
+    BREAKING CHANGE:
+    ZeroMQ no longer supported on native Windows for EdgeX
+    MessageBus
+    ```
+- **snap:** Source metadata from central repo ([#0413261](https://github.com/edgexfoundry/device-snmp-go/commits/0413261))
+
+### Continuous Integration 🔄
+- gomod changes related for Go 1.17 ([#3592ae5](https://github.com/edgexfoundry/device-snmp-go/commits/3592ae5))
+- Go 1.17 related changes ([#c9558d6](https://github.com/edgexfoundry/device-snmp-go/commits/c9558d6))
 
 ## [v2.1.0] Jakarta - 2021-11-18  (Not Compatible with 1.x releases)
 
 ### Bug Fixes 🐛
 - update all TOML to use quote and not single-quote ([#0ee2e50](https://github.com/edgexfoundry/device-snmp-go/commits/0ee2e50))
+
+
+### Bug Fixes ðŸ›
+- update all TOML to use quote and not single-quote ([#0ee2e50](https://github.com/edgexfoundry/device-snmp-go/commits/0ee2e50))
+
+### Documentation 📖
+- Update build status badge ([#f9a6796](https://github.com/edgexfoundry/device-snmp-go/commits/f9a6796))
+
+### Build 👷
+- Update to use released SDK and go-mods ([#9e6018e](https://github.com/edgexfoundry/device-snmp-go/commits/9e6018e))
+- Update alpine base to 3.14 ([#eba3941](https://github.com/edgexfoundry/device-snmp-go/commits/eba3941))
+
+### Continuous Integration 🔄
+- Remove need for CI specific Dockerfile ([#7d77ce6](https://github.com/edgexfoundry/device-snmp-go/commits/7d77ce6))
 
 ## [v2.0.0] Ireland - 2021-06-30  (Not Compatible with 1.x releases)
 
