@@ -40,10 +40,6 @@
 ### Bug Fixes 🐛
 - update all TOML to use quote and not single-quote ([#0ee2e50](https://github.com/edgexfoundry/device-snmp-go/commits/0ee2e50))
 
-
-### Bug Fixes ðŸ›
-- update all TOML to use quote and not single-quote ([#0ee2e50](https://github.com/edgexfoundry/device-snmp-go/commits/0ee2e50))
-
 ### Documentation 📖
 - Update build status badge ([#f9a6796](https://github.com/edgexfoundry/device-snmp-go/commits/f9a6796))
 
