@@ -18,7 +18,9 @@
 - Enable security hardening ([#8ca7183](https://github.com/edgexfoundry/device-snmp-go/commits/8ca7183))
 
 ### Bug Fixes 🐛
-- **snap:** expose parent directory in device-config plug ([#e81302c](https://github.com/edgexfoundry/device-snmp-go/commits/e81302c))### Code Refactoring â™»
+- **snap:** expose parent directory in device-config plug ([#e81302c](https://github.com/edgexfoundry/device-snmp-go/commits/e81302c))
+
+### Code Refactoring ♻
 - **snap:** remove obsolete passthrough usage ([#42a8101](https://github.com/edgexfoundry/device-snmp-go/commits/42a8101))
 - **snap:** remove redundant content indentifier ([#3e246a5](https://github.com/edgexfoundry/device-snmp-go/commits/3e246a5))
 
