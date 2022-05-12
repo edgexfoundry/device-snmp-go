@@ -71,12 +71,15 @@
     ```
 - update for new service key name ([#1279fd2](https://github.com/edgexfoundry/device-snmp-go/commits/1279fd2))
 - use v2 device-sdk ([#4f41517](https://github.com/edgexfoundry/device-snmp-go/commits/4f41517))
+
 ### Documentation 📖
 - Add badges to readme ([#e4f17ee](https://github.com/edgexfoundry/device-snmp-go/commits/e4f17ee))
+
 ### Build 👷
 - update build files for v2 ([#6247689](https://github.com/edgexfoundry/device-snmp-go/commits/6247689))
 - update Dockerfiles to use go 1.16 ([#029de77](https://github.com/edgexfoundry/device-snmp-go/commits/029de77))
 - update go.mod to go 1.16 ([#1535d2d](https://github.com/edgexfoundry/device-snmp-go/commits/1535d2d))
+
 ### Continuous Integration 🔄
 - update local docker image names ([#639fbe6](https://github.com/edgexfoundry/device-snmp-go/commits/639fbe6))
 
