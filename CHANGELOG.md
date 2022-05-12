@@ -12,7 +12,7 @@
 - [go-mod-secrets](https://github.com/edgexfoundry/go-mod-secrets/blob/main/CHANGELOG.md) (indirect dependency)
 - [go-mod-configuration](https://github.com/edgexfoundry/go-mod-configuration/blob/main/CHANGELOG.md) (indirect dependency)
 
-## [v2.0.0] Kamakura - 2022-05-11  (Not Compatible with 1.x releases)
+## [v2.2.0] Kamakura - 2022-05-11  (Not Compatible with 1.x releases)
 
 ### Features ✨
 - Enable security hardening ([#8ca7183](https://github.com/edgexfoundry/device-snmp-go/commits/8ca7183))
