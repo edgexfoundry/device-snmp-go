@@ -3,7 +3,7 @@ module github.com/edgexfoundry/device-snmp-go
 go 1.18
 
 require (
-	github.com/edgexfoundry/device-sdk-go/v2 v2.2.1-dev.11
+	github.com/edgexfoundry/device-sdk-go/v2 v2.2.1-dev.12
 	github.com/edgexfoundry/go-mod-core-contracts/v2 v2.2.0
 	github.com/soniah/gosnmp v1.21.0
 )
