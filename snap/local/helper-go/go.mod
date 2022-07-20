@@ -1,4 +1,4 @@
-module github.com/edgexfoundry/device-rest-go/hooks
+module github.com/edgexfoundry/device-rest-go/snap/local/helper-go
 
 require github.com/canonical/edgex-snap-hooks/v2 v2.4.1
 
