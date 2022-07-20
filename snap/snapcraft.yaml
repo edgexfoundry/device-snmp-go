@@ -72,16 +72,16 @@ parts:
 
       install -DT "./cmd/device-snmp" "$SNAPCRAFT_PART_INSTALL/bin/device-snmp"
 
-      # copy all config files
-      mkdir -p $SNAPCRAFT_PART_INSTALL/config/device-snmp/res
-      cp -rv cmd/res/configuration.toml $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/configuration.toml 
-      cp -rv cmd/res/devices $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/devices     
-      cp -rv cmd/res/profiles $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/profiles      
-
-      install -DT "./Attribution.txt" \
-         "$SNAPCRAFT_PART_INSTALL/usr/share/doc/device-snmp/Attribution.txt"
-      install -DT "./LICENSE" \
-         "$SNAPCRAFT_PART_INSTALL/usr/share/doc/device-snmp/LICENSE"
+      RES=$SNAPCRAFT_PART_INSTALL/config/device-snmp/res/
+      mkdir -p $RES
+      cp    cmd/res/configuration.toml $RES
+      cp -r cmd/res/devices $RES
+      cp -r cmd/res/profiles $RES
+      
+      DOC=$SNAPCRAFT_PART_INSTALL/usr/share/doc/device-snmp
+      mkdir -p $DOC
+      cp Attribution.txt $DOC/Attribution.txt
+      cp LICENSE $DOC/LICENSE
 
   local-bin:
     plugin: dump
