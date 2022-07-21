@@ -19,7 +19,6 @@
 package main
 
 import (
-	"fmt"
 	hooks "github.com/canonical/edgex-snap-hooks/v2"
 	"github.com/canonical/edgex-snap-hooks/v2/log"
 	"github.com/canonical/edgex-snap-hooks/v2/options"
@@ -39,8 +38,6 @@ var ConfToEnv = map[string]string{
 	"device.use-message-bus":       "DEVICE_USEMESSAGEBUS",
 }
 
-var cli *hooks.CtlCli = hooks.NewSnapCtl()
-
 // configure is called by the main function
 func configure() {
 
@@ -48,13 +45,13 @@ func configure() {
 
 	log.SetComponentName("configure")
 
-	// read and handle config
-	envJSON, err := cli.Config(hooks.EnvConfig)
+	log.Info("Processing legacy env options")
+	envJSON, err := hooks.NewSnapCtl().Config(hooks.EnvConfig)
 	if err != nil {
 		log.Fatalf("Reading config 'env' failed: %v", err)
 	}
 	if envJSON != "" {
-		hooks.Debug(fmt.Sprintf("envJSON: %s", envJSON))
+		log.Debugf("envJSON: %s", envJSON)
 		err = hooks.HandleEdgeXConfig(service, envJSON, ConfToEnv)
 		if err != nil {
 			log.Fatalf("HandleEdgeXConfig failed: %v", err)
