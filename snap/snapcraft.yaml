@@ -24,15 +24,16 @@ slots:
 apps:
   device-snmp:
     adapter: full
-    command: bin/device-snmp -confdir $SNAP_DATA/config/device-snmp -profile res --registry $CONSUL_ADDR
+    command: bin/device-snmp $CONFIG_PRO_ARG $CONF_ARG $REGISTRY_ARG
     command-chain:
-      - bin/startup-env-var.sh
+      - bin/source-env-file.sh
     environment:
-      CONSUL_ADDR: "consul://localhost:8500"
+      CONFIG_PRO_ARG: "--cp=consul.http://localhost:8500"
+      CONF_ARG: "--confdir=$SNAP_DATA/config/device-snmp/res"
+      REGISTRY_ARG: "--registry"
       DEVICE_PROFILESDIR: $SNAP_DATA/config/device-snmp/res/profiles
       DEVICE_DEVICESDIR: $SNAP_DATA/config/device-snmp/res/devices
       SECRETSTORE_TOKENFILE: $SNAP_DATA/device-snmp/secrets-token.json
-      WRITABLE_LOGLEVEL: 'INFO'
     daemon: simple
     install-mode: disable
     plugs: [network, network-bind]
@@ -43,15 +44,14 @@ plugs:
     target: $SNAP_DATA/config/device-snmp
 
 parts:
-  hooks:
-    source: snap/local/hooks
+  helper-go:
+    source: snap/local/helper-go
     plugin: make
     build-snaps: [go/1.18/stable]
     override-build: |
       cd $SNAPCRAFT_PART_SRC
       make build
-      install -DT ./cmd/configure/configure $SNAPCRAFT_PART_INSTALL/snap/hooks/configure
-      install -DT ./cmd/install/install $SNAPCRAFT_PART_INSTALL/snap/hooks/install
+      install -DT ./helper-go $SNAPCRAFT_PART_INSTALL/bin/helper-go
 
   device-snmp:
     after: [metadata]
@@ -67,25 +67,27 @@ parts:
       # the version is needed for the build
       cat ./VERSION
 
-      go mod tidy
+      make tidy
       make build
 
       install -DT "./cmd/device-snmp" "$SNAPCRAFT_PART_INSTALL/bin/device-snmp"
 
-      # copy all config files
-      mkdir -p $SNAPCRAFT_PART_INSTALL/config/device-snmp/res
-      cp -rv cmd/res/configuration.toml $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/configuration.toml 
-      cp -rv cmd/res/devices $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/devices     
-      cp -rv cmd/res/profiles $SNAPCRAFT_PART_INSTALL/config/device-snmp/res/profiles      
+      RES=$SNAPCRAFT_PART_INSTALL/config/device-snmp/res/
+      mkdir -p $RES
+      cp    cmd/res/configuration.toml $RES
+      cp -r cmd/res/devices $RES
+      cp -r cmd/res/profiles $RES
+      
+      DOC=$SNAPCRAFT_PART_INSTALL/usr/share/doc/device-snmp
+      mkdir -p $DOC
+      cp Attribution.txt $DOC/Attribution.txt
+      cp LICENSE $DOC/LICENSE
 
-      install -DT "./Attribution.txt" \
-         "$SNAPCRAFT_PART_INSTALL/usr/share/doc/device-snmp/Attribution.txt"
-      install -DT "./LICENSE" \
-         "$SNAPCRAFT_PART_INSTALL/usr/share/doc/device-snmp/LICENSE"
-
-  config-common:
+  local-bin:
     plugin: dump
-    source: snap/local/runtime-helpers
+    source: snap/local/bin
+    organize:
+      source-env-file.sh: bin/source-env-file.sh
 
   metadata:
     plugin: nil
