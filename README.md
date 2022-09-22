@@ -9,6 +9,20 @@ This device service facilitates via the configuration, accessing the TrendNet TE
 You can send and receive event readings from the network switch.  Currently this device service is tailored specifically to the TrendNET TEG-082WS switch but refactoring could take place to abstract the device type and provde a myrida of device profiles. You would need to interrogate the network switch and then determine the appropriate device profile.   This particular device service uses the SNMP (Simple Network Management Protocol).
 SNMP communication with the switch permits the device service to create events based on the Network Switch data. For further information on the Simple Network Management Protocol [`SNMP Wiki`][ExWk]
 
+## Build with NATS Messaging
+Currently, the NATS Messaging capability (NATS MessageBus) is opt-in at build time.
+This means that the published Docker image and Snaps do not include the NATS messaging capability.
+
+The following make commands will build the local binary or local Docker image with NATS messaging
+capability included.
+```makefile
+make build-nats
+make docker-nats
+```
+
+The locally built Docker image can then be used in place of the published Docker image in your compose file.
+See [Compose Builder](https://github.com/edgexfoundry/edgex-compose/tree/main/compose-builder#gen) `nat-bus` option to generate compose file for NATS and local dev images.
+
 #### TODOS
 > Async callbacks not supported
 > SNMP Traps are currently not implemented but will be completed at a future date. 
