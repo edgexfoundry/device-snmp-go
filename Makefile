@@ -34,11 +34,14 @@ CGOFLAGS=-ldflags "-linkmode=external \
 
 build: $(MICROSERVICES)
 
+build-nats:
+	make -e ADD_BUILD_TAGS=include_nats_messaging build
+
 tidy:
 	go mod tidy
 
 cmd/device-snmp:
-	$(GOCGO) build $(CGOFLAGS) -o $@ ./cmd
+	$(GOCGO) build -tags "$(ADD_BUILD_TAGS)" $(CGOFLAGS) -o $@ ./cmd
 
 unittest:
 	$(GOCGO) test ./... -coverprofile=coverage.out
@@ -66,10 +69,14 @@ docker: $(DOCKERS)
 
 docker_device_snmp_go:
 	docker build \
+		--build-arg ADD_BUILD_TAGS=$(ADD_BUILD_TAGS) \
 		--label "git_sha=$(GIT_SHA)" \
 		-t edgexfoundry/device-snmp:$(GIT_SHA) \
 		-t edgexfoundry/device-snmp:$(VERSION)-dev \
 		.
+
+docker-nats:
+	make -e ADD_BUILD_TAGS=include_nats_messaging docker
 
 vendor:
 	$(GO) mod vendor
