@@ -12,6 +12,24 @@
 - [go-mod-secrets](https://github.com/edgexfoundry/go-mod-secrets/blob/main/CHANGELOG.md) (indirect dependency)
 - [go-mod-configuration](https://github.com/edgexfoundry/go-mod-configuration/blob/main/CHANGELOG.md) (indirect dependency)
 
+## [v2.3.0] Levski - 2022-11-09 (Not Compatible with 1.x releases)
+
+### Features ✨
+
+- Add Service Metrics configuration ([#200](https://github.com/edgexfoundry/device-snmp-go/issues/200)) ([#073f662](https://github.com/edgexfoundry/device-snmp-go/commits/073f662))
+- Add NATS configuration and build option ([#191](https://github.com/edgexfoundry/device-snmp-go/issues/191)) ([#60caeb9](https://github.com/edgexfoundry/device-snmp-go/commits/60caeb9))
+- Add commanding via message configuration ([#7cd4731](https://github.com/edgexfoundry/device-snmp-go/commits/7cd4731))
+- Add go-winio to attribution (new SPIFFE dependency) ([#175](https://github.com/edgexfoundry/device-snmp-go/issues/175)) ([#c4b573a](https://github.com/edgexfoundry/device-snmp-go/commits/c4b573a))
+- **snap:** add config interface with unique identifier ([#197](https://github.com/edgexfoundry/device-snmp-go/issues/197)) ([#c5649dd](https://github.com/edgexfoundry/device-snmp-go/commits/c5649dd))
+
+### Code Refactoring ♻
+
+- **snap:** edgex-snap-hooks related upgrade ([#185](https://github.com/edgexfoundry/device-snmp-go/issues/185)) ([#a30604e](https://github.com/edgexfoundry/device-snmp-go/commits/a30604e))
+
+### Build 👷
+
+- Upgrade to Go 1.18 and optimize attribution script ([#182](https://github.com/edgexfoundry/device-snmp-go/issues/182)) ([#d0a0e99](https://github.com/edgexfoundry/device-snmp-go/commits/d0a0e99))
+
 ## [v2.2.0] Kamakura - 2022-05-11  (Not Compatible with 1.x releases)
 
 ### Features ✨
