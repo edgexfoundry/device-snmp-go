@@ -94,7 +94,7 @@ Verify the deployment by navigating to your server address in your preferred bro
 Or you can use the curl command from your console if your on linux or OSX.  If you choose to use Postman just use the address less the curl command. 
 
 ```sh
-$ curl http://localhost:59993/api/v3/ping
+$ curl http://localhost:59993/api/v2/ping
 ```
 
 #### Reboot 
@@ -102,7 +102,7 @@ The current state of the Network Switch reboot
 ##### (SNMP OID)  `{ oid: "1.3.6.1.4.1.28866.2.37.24.5.1.0", community: "private"  }`
 
 ```sh
-$ curl http://localhost:59993/api/v3/trendnet01/Reboot
+$ curl http://localhost:59993/api/v2/trendnet01/Reboot
 ```
 
 #### UpTime 
@@ -110,42 +110,42 @@ The switch uptime since last reboot in TimeTicks
 ##### (SNMP OID) `{ oid: "1.3.6.1.4.1.28866.2.37.16.1.1.0", community: "private"  }`
 
 ```sh
-$ curl http://localhost:59993/api/v3/trendnet01/Uptime
+$ curl http://localhost:59993/api/v2/trendnet01/Uptime
 ```
 #### Firmware 
 The switch firmware version 
 ##### (SNMP OID) ` { oid: "1.3.6.1.4.1.28866.2.37.16.1.2.0", community: "private"  } `
 
 ```sh
-$ curl http://localhost:59993/api/v3/trendnet01/Firmware
+$ curl http://localhost:59993/api/v2/trendnet01/Firmware
 ```
 #### MACAddress
 The switch MAC Address 
 ##### (SNMP OID) `{ oid: "1.3.6.1.4.1.28866.2.37.16.2.1.0", community: "private"  } `
 
 ```sh
-$ curl http://localhost:59993/api/v3/trendnet01/MacAddress
+$ curl http://localhost:59993/api/v2/trendnet01/MacAddress
 ```
 #### IPV4Address
 The switch IPV4 Address 
 ##### (SNMP OID) `{ oid: "1.3.6.1.4.1.28866.2.37.16.1.2.0", community: "private"  } `
 
 ```sh
-$ curl http://localhost:59993/api/v3/trendnet01/IPV4Address
+$ curl http://localhost:59993/api/v2/trendnet01/IPV4Address
 ```
 #### IPV4SubnetMask
 The switch Subnet Mask 
 ##### (SNMP OID) `{ oid: "1.3.6.1.4.1.28866.2.37.16.3.3.0", community: "private"  } `
 
 ```sh
-$ curl http://localhost:59993/api/v3/trendnet01/IPV4SubnetMask
+$ curl http://localhost:59993/api/v2/trendnet01/IPV4SubnetMask
 ```
 #### IPV4GatewayAddress
 The switch IPV4 Gateway Address
 ##### (SNMP OID) `{ oid: "1.3.6.1.4.1.28866.2.37.16.3.4.0", community: "private"  } `
 
 ```sh
-$ curl http://localhost:59993/api/v3/trendnet01/IPV4GatewayAddress
+$ curl http://localhost:59993/api/v2/trendnet01/IPV4GatewayAddress
 ```
 #### PUT calls (REST)
 For the set commands we presently just have one.  I have included the SNMP MIB OID table entry(s) so you can see what OID's the device service is using. 
@@ -161,7 +161,7 @@ Restarts the switch
 | RebootControlState | 3 | Factory reset, restarts switch with no IP Address |
 
 ```sh
-$ curl -H 'Content-Type: application/json' -X PUT -d '{"RebootControlState":"1"}' http://localhost:59993/api/v3/Reboot
+$ curl -H 'Content-Type: application/json' -X PUT -d '{"RebootControlState":"1"}' http://localhost:59993/api/v2/Reboot
 ```
 
 ### Configuration
