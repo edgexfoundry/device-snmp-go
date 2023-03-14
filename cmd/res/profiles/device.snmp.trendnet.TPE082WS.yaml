@@ -84,7 +84,7 @@ deviceResources:
 deviceCommands:
   -
     name: Reboot
-    readWrite: "RW"
+    readWrite: "R"
     resourceOperations:
       - { deviceResource: "RebootCurrentState" }
   -
