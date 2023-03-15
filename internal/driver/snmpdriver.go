@@ -25,8 +25,8 @@ type SNMPDriver struct {
 
 var client *SNMPClient
 
-//Used to avoid get/set at the same time. If this happens simultaneously, state
-//of the device can get out of sync with command actuation result
+// Used to avoid get/set at the same time. If this happens simultaneously, state
+// of the device can get out of sync with command actuation result
 var mu sync.Mutex
 
 // DisconnectDevice handles protocol-specific cleanup when a device
