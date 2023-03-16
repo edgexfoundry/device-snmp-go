@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/edgexfoundry/device-sdk-go/v3 v3.0.0-dev.28
-	github.com/edgexfoundry/go-mod-core-contracts/v3 v3.0.0-dev.14
+	github.com/edgexfoundry/go-mod-core-contracts/v3 v3.0.0-dev.30
 	github.com/soniah/gosnmp v1.21.0
 )
 
