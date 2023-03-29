@@ -15,9 +15,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
   -
     name: AmberLightControlState
     description: "Amber light state."
@@ -27,9 +27,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
   -
     name: GreenLightControlState
     description: "Green light state."
@@ -39,9 +39,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
   -
     name: BuzzerControlState
     description: "Buzzer state."
@@ -51,9 +51,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
   -
     name: RedLightTimer
     description: "Red light timer."
@@ -63,9 +63,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
   -
     name: AmberLightTimer
     description: "Amber light timer."
@@ -75,9 +75,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
   -
     name: GreenLightTimer
     description: "Green light timer."
@@ -87,9 +87,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
   -
     name: BuzzerTimer
     description: "Green light timer."
@@ -99,9 +99,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
   -
     name: RedLightCurrentState
     description: "Red light current state."
@@ -111,9 +111,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
   -
     name: AmberLightCurrentState
     description: "Amber light current state."
@@ -123,9 +123,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
   -
     name: GreenLightCurrentState
     description: "Green light current state."
@@ -135,9 +135,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
   -
     name: BuzzerCurrentState
     description: "Buzzer current state."
@@ -147,9 +147,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "5"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 5
+      defaultValue: 1
 
 deviceCommands:
   -

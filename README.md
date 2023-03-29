@@ -166,8 +166,8 @@ $ curl -H 'Content-Type: application/json' -X PUT -d '{"RebootControlState":"1"}
 
 ### Configuration
 
-This service is driven by a `configuration.toml` [TOML-based](https://en.wikipedia.org/wiki/TOML) file that resides
-in the directory the application is executed from. See [cmd/res/configuration.toml](cmd/res/configuration.toml) for default configuration.
+This service is driven by a `configuration.yaml` [YAML-based](https://en.wikipedia.org/wiki/YAML) file that resides
+in the directory the application is executed from. See [cmd/res/configuration.yaml](cmd/res/configuration.yaml) for default configuration.
 ### References
 > Website: [Dillinger.io](https://dillinger.io) "A great README.md file editor"
 

@@ -15,9 +15,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "R"
-      minimum: "1"
-      maximum: "3"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 3
+      defaultValue: 1
   -
     name: RebootControlState
     description: "Switch reboot control state"
@@ -26,9 +26,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "3"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 3
+      defaultValue: 1
   -
     name: UpTimeCurrentState
     description: "Switch uptime current state"
@@ -37,9 +37,9 @@ deviceResources:
     properties:
       valueType: "Uint64"
       readWrite: "R"
-      minimum: "0"
-      maximum: "18446744073709551615"
-      defaultValue: "0"
+      minimum: 0
+      maximum: 18446744073709551615
+      defaultValue: 0
   -
     name: MacAddressCurrentState
     description: "Switch Mac address"

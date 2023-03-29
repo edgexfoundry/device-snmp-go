@@ -16,9 +16,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "2"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 2
+      defaultValue: 1
   -
     name: RebootCurrentStatePort2
     description: "PowerAdminEnable Port 2"
@@ -27,9 +27,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "2"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 2
+      defaultValue: 1
   -
     name: RebootCurrentStatePort3
     description: "PowerAdminEnable Port 3"
@@ -38,9 +38,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "2"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 2
+      defaultValue: 1
   -
     name: RebootCurrentStatePort4
     description: "PowerAdminEnable Port 4"
@@ -49,9 +49,9 @@ deviceResources:
     properties:
       valueType: "Int32"
       readWrite: "RW"
-      minimum: "1"
-      maximum: "2"
-      defaultValue: "1"
+      minimum: 1
+      maximum: 2
+      defaultValue: 1
   -
     name: UpTimeCurrentState
     description: "Switch uptime control state"
@@ -60,9 +60,9 @@ deviceResources:
     properties:
       valueType: "Uint64"
       readWrite: "RW"
-      minimum: "0"
-      maximum: "18446744073709551615"
-      defaultValue: "0"
+      minimum: 0
+      maximum: 18446744073709551615
+      defaultValue: 0
   -
     name: MacAddressCurrentState
     description: "Switch Mac address"
