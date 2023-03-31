@@ -9,7 +9,7 @@ Service:
 # uncomment when running from command-line in hybrid mode with -cp -o flags
 # Clients:
 #   core-metadata:
-#     Host: "localhost" 
+#     Host: "localhost"
 # Registry:
 #   Host: "localhost"
 
