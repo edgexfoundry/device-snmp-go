@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"sync"
 
+	"github.com/edgexfoundry/device-sdk-go/v3/pkg/interfaces"
 	dsModels "github.com/edgexfoundry/device-sdk-go/v3/pkg/models"
 	"github.com/edgexfoundry/go-mod-core-contracts/v3/clients/logger"
 	"github.com/edgexfoundry/go-mod-core-contracts/v3/common"
@@ -38,9 +39,9 @@ func (s *SNMPDriver) DisconnectDevice(deviceName string, protocols map[string]mo
 
 // Initialize performs protocol-specific initialization for the device
 // service.
-func (s *SNMPDriver) Initialize(lc logger.LoggingClient, asyncCh chan<- *dsModels.AsyncValues, deviceCh chan<- []dsModels.DiscoveredDevice) error {
-	s.lc = lc
-	s.asyncCh = asyncCh
+func (s *SNMPDriver) Initialize(sdk interfaces.DeviceServiceSDK) error {
+	s.lc = sdk.LoggingClient()
+	s.asyncCh = sdk.AsyncValuesChannel()
 	return nil
 }
 
@@ -57,8 +58,8 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 	var TCP = protocols["TCP"]
 
 	Name := deviceName
-	Address := TCP["Address"]
-	Port := TCP["Port"]
+	Address := TCP["Address"].(string)
+	Port := TCP["Port"].(string)
 
 	//s.lc.Debug(fmt.Sprintf("SimpleDriver.HandleReadCommands: protocols: %v operation: %v attributes: %v", protocols, reqs[0].RO.Operation, reqs[0].DeviceResource.Attributes))
 

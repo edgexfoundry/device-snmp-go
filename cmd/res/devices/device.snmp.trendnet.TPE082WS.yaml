@@ -1,0 +1,24 @@
+# Pre-define Devices
+# NOTE: You will need to modify the Address to a DNS or named resource potentially.
+#       Port 161 is the default SNMP provider port.
+deviceList:
+  - name: "trendnet01"
+    profileName: "trendnet"
+    description: "Switch SNMP service interface"
+    labels: [ "device-snmp-switch-example" ]
+    protocols:
+      TCP:
+        Address: "192.168.10.200"
+        Port: "161"
+    autoEvents:
+      - interval: "10s"
+        onChange: true
+        sourceName: "MacAddress"
+    
+      - interval: "15s"
+        onChange: true
+        sourceName: "Firmware"
+    
+      - interval: "5s"
+        onChange: false
+        sourceName: "Uptime"
