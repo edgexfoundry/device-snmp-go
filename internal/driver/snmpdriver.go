@@ -1,7 +1,7 @@
 // -*- Mode: Go; indent-tabs-mode: t -*-
 //
 // Copyright (C) 2018-2019 Dell Technologies
-// Copyright (C) 2020-2021 IOTech Ltd
+// Copyright (C) 2020-2021,2023 IOTech Ltd
 //
 // SPDX-License-Identifier: Apache-2.0
 
@@ -16,6 +16,7 @@ import (
 	dsModels "github.com/edgexfoundry/device-sdk-go/v3/pkg/models"
 	"github.com/edgexfoundry/go-mod-core-contracts/v3/clients/logger"
 	"github.com/edgexfoundry/go-mod-core-contracts/v3/common"
+	"github.com/edgexfoundry/go-mod-core-contracts/v3/errors"
 	"github.com/edgexfoundry/go-mod-core-contracts/v3/models"
 )
 
@@ -29,6 +30,12 @@ var client *SNMPClient
 // Used to avoid get/set at the same time. If this happens simultaneously, state
 // of the device can get out of sync with command actuation result
 var mu sync.Mutex
+
+const (
+	TcpProtocol     = "TCP"
+	AddressProperty = "Address"
+	PortProperty    = "Port"
+)
 
 // DisconnectDevice handles protocol-specific cleanup when a device
 // is removed.
@@ -55,11 +62,11 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 		return
 	}
 
-	var TCP = protocols["TCP"]
+	var TCP = protocols[TcpProtocol]
 
 	Name := deviceName
-	Address := TCP["Address"].(string)
-	Port := TCP["Port"].(string)
+	Address := TCP[AddressProperty].(string)
+	Port := TCP[PortProperty].(string)
 
 	//s.lc.Debug(fmt.Sprintf("SimpleDriver.HandleReadCommands: protocols: %v operation: %v attributes: %v", protocols, reqs[0].RO.Operation, reqs[0].DeviceResource.Attributes))
 
@@ -224,5 +231,35 @@ func (s *SNMPDriver) UpdateDevice(deviceName string, protocols map[string]models
 
 func (s *SNMPDriver) RemoveDevice(deviceName string, protocols map[string]models.ProtocolProperties) error {
 	s.lc.Debugf("Device %s is removed", deviceName)
+	return nil
+}
+
+func (s *SNMPDriver) Discover() error {
+	return fmt.Errorf("driver's Discover function isn't implemented")
+}
+
+func (s *SNMPDriver) ValidateDevice(device models.Device) error {
+	protocol, ok := device.Protocols[TcpProtocol]
+	if !ok {
+		return errors.NewCommonEdgeX(errors.KindContractInvalid, fmt.Sprintf("protocol '%s' does not exist", TcpProtocol), nil)
+	}
+	address := ""
+	if v, ok := protocol[AddressProperty]; ok {
+		address = fmt.Sprintf("%v", v)
+	}
+	if address == "" {
+		return errors.NewCommonEdgeX(errors.KindContractInvalid, fmt.Sprintf("protocol properties '%s' does not exist", AddressProperty), nil)
+	}
+	port := ""
+	if v, ok := protocol[PortProperty]; ok {
+		port = fmt.Sprintf("%v", v)
+		_, err := strconv.ParseUint(port, 10, 64)
+		if err != nil {
+			return errors.NewCommonEdgeX(errors.KindContractInvalid, fmt.Sprintf("invalid protocol properties '%s': %v", PortProperty, port), err)
+		}
+	}
+	if port == "" {
+		return errors.NewCommonEdgeX(errors.KindContractInvalid, fmt.Sprintf("protocol properties '%s' does not exist", PortProperty), nil)
+	}
 	return nil
 }
