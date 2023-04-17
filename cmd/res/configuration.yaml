@@ -18,3 +18,8 @@ MessageBus:
   Optional:
   # Default MQTT & NATS Specific options that need to be here to enable environment variable overrides of them
     ClientId: "device-snmp"
+
+Device:
+  # These have common values (currently), but must be here for service local env overrides to apply when customized
+  ProfilesDir: "./res/profiles"
+  DevicesDir: "./res/devices"
