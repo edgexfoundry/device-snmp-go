@@ -12,6 +12,48 @@
 - [go-mod-secrets](https://github.com/edgexfoundry/go-mod-secrets/blob/main/CHANGELOG.md) (indirect dependency)
 - [go-mod-configuration](https://github.com/edgexfoundry/go-mod-configuration/blob/main/CHANGELOG.md) (indirect dependency)
 
+## [v3.0.0] Minnesota - 2023-05-31 (Only compatible with the 3.x releases)
+
+### Features ✨
+- Add device validation function ([#284](https://github.com/edgexfoundry/device-snmp-go/pull/284))
+    ```text
+    BREAKING CHANGE: Implement `ValidateDevice` function to validate device protocol properties for core-metadata  
+    ```
+- Update for common config ([#255](https://github.com/edgexfoundry/device-snmp-go/pull/255))
+    ```text
+    BREAKING CHANGE: Configuration file is changed to remove common config settings
+    ```
+- Use latest SDK for MessageBus Request API ([#211](https://github.com/edgexfoundry/device-snmp-go/pull/211))
+    ```text
+    BREAKING CHANGE: Commands via MessageBus topic configuration are changed
+    ```
+- Remove ZeroMQ MessageBus capability ([#210](https://github.com/edgexfoundry/device-snmp-go/pull/210))
+    ```text
+    BREAKING CHANGE: ZeroMQ MessageBus capability no longer available
+    ```
+
+### Bug Fixes 🐛
+- **snap:** Refactor to avoid conflicts with readonly config provider directory ([#270](https://github.com/edgexfoundry/device-snmp-go/issues/270)) ([#224900f](https://github.com/edgexfoundry/device-snmp-go/commits/224900f))
+
+### Code Refactoring ♻
+- Change configuration and devices files format to YAML ([#279](https://github.com/edgexfoundry/device-snmp-go/pull/279))
+    ```text
+    BREAKING CHANGE: Configuration files are now in YAML format, Default file name is now configuration.yaml
+    ```
+- **snap:** Update command and metadata sourcing ([#266](https://github.com/edgexfoundry/device-snmp-go/issues/266)) ([#965f04e](https://github.com/edgexfoundry/device-snmp-go/commits/965f04e))
+- **snap:** Drop the support for legacy snap env options ([#213](https://github.com/edgexfoundry/device-snmp-go/issues/213))
+    ```text
+    BREAKING CHANGE:
+    - Drop the support for legacy snap options with env. prefix
+    - Upgrade edgex-snap-hooks to v3
+    - Upgrade edgex-snap-testing Github action to v3
+    - Add snap's Go module to dependabot
+    - Other minor refactoring
+    ```
+
+### Build 👷
+- Update to Go 1.20, Alpine 3.17 and linter v1.51.2 ([#06818cd](https://github.com/edgexfoundry/device-snmp-go/commits/06818cd))
+
 ## [v2.3.0] Levski - 2022-11-09 (Not Compatible with 1.x releases)
 
 ### Features ✨
