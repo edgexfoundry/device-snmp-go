@@ -18,7 +18,9 @@ VERSION=$(shell cat ./VERSION 2>/dev/null || echo 0.0.0)
 
 GIT_SHA=$(shell git rev-parse HEAD)
 
-GOFLAGS=-ldflags "-X github.com/edgexfoundry/device-snmp-go.Version=$(VERSION)" -trimpath -mod=readonly
+GOFLAGS=-ldflags "-X github.com/edgexfoundry/device-snmp-go.Version=$(VERSION) \
+                  -X github.com/edgexfoundry/device-sdk-go/v3/internal/common.SDKVersion=$(SDKVERSION)" \
+                   -trimpath -mod=readonly
 
 build: $(MICROSERVICES)
 
