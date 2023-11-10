@@ -12,6 +12,36 @@
 - [go-mod-secrets](https://github.com/edgexfoundry/go-mod-secrets/blob/main/CHANGELOG.md) (indirect dependency)
 - [go-mod-configuration](https://github.com/edgexfoundry/go-mod-configuration/blob/main/CHANGELOG.md) (indirect dependency)
 
+
+## [v3.1.0] Napa - 2023-11-15 (Only compatible with the 3.x releases)
+
+
+### ✨  Features
+
+- Remove snap packaging ([#322](https://github.com/edgexfoundry/device-snmp-go/issues/322)) ([c9f5e79…](https://github.com/edgexfoundry/device-snmp-go/commit/c9f5e79f7f6757774f639370f81fc5ed0e697313))
+```text
+
+BREAKING CHANGE: Remove snap packaging ([#322](https://github.com/edgexfoundry/device-snmp-go/issues/322))
+
+```
+
+
+### ♻ Code Refactoring
+
+- Remove obsolete comments from config file ([#323](https://github.com/edgexfoundry/device-snmp-go/issues/323)) ([e3ad67b…](https://github.com/edgexfoundry/device-snmp-go/commit/e3ad67b18069b788d3b650faffca04e548476692))
+- Remove github.com/pkg/errors from Attribution.txt ([c47c4ed…](https://github.com/edgexfoundry/device-snmp-go/commit/c47c4ed6f33dd6b026481a957b2bee764cde5d0f))
+
+
+### 👷 Build
+
+- Upgrade to go-1.21, Linter1.54.2 and Alpine 3.18 ([#317](https://github.com/edgexfoundry/device-snmp-go/issues/317)) ([1e145ee…](https://github.com/edgexfoundry/device-snmp-go/commit/1e145ee1301df0b97f405486925368d7c560441a))
+
+
+### 🤖 Continuous Integration
+
+- Add automated release workflow on tag creation ([67706f8…](https://github.com/edgexfoundry/device-snmp-go/commit/67706f8f4f9b3012e3ba766cacf3a9b27c779e94))
+
+
 ## [v3.0.0] Minnesota - 2023-05-31 (Only compatible with the 3.x releases)
 
 ### Features ✨
