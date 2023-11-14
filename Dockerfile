@@ -38,6 +38,8 @@ FROM alpine:3.18
 
 # dumb-init needed for injected secure bootstrapping entrypoint script when run in secure mode.
 RUN apk add --update --no-cache dumb-init
+# Ensure using latest versions of all installed packages to avoid any recent CVEs
+RUN apk --no-cache upgrade
 
 COPY --from=builder /device-snmp-go/cmd /
 COPY --from=builder /device-snmp-go/Attribution.txt /
