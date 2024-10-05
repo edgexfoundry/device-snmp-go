@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018-2021 IOTech Ltd
+# Copyright (c) 2018-2024 IOTech Ltd
 # Copyright (c) 2023 Intel Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-ARG BASE=golang:1.21-alpine3.18
+ARG BASE=golang:1.23-alpine3.20
 FROM ${BASE} AS builder
 
 ARG ADD_BUILD_TAGS=""
@@ -34,7 +34,7 @@ RUN [ ! -d "vendor" ] && go mod download all || echo "skipping..."
 COPY . .
 RUN ${MAKE}
 
-FROM alpine:3.18
+FROM alpine:3.20
 
 # dumb-init needed for injected secure bootstrapping entrypoint script when run in secure mode.
 RUN apk add --update --no-cache dumb-init
