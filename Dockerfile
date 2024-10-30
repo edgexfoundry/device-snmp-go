@@ -49,4 +49,4 @@ EXPOSE 59993
 EXPOSE 161
 
 ENTRYPOINT ["/device-snmp"]
-CMD ["--cp=consul.http://edgex-core-consul:8500", "--registry"]
+CMD ["-cp=keeper.http://edgex-core-keeper:59890", "--registry"]
