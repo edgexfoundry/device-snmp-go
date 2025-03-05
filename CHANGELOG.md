@@ -12,6 +12,20 @@
 - [go-mod-secrets](https://github.com/edgexfoundry/go-mod-secrets/blob/main/CHANGELOG.md) (indirect dependency)
 - [go-mod-configuration](https://github.com/edgexfoundry/go-mod-configuration/blob/main/CHANGELOG.md) (indirect dependency)
 
+## [4.0.0] Odessa - 2025-03-12 (Only compatible with the 4.x releases)
+
+### ♻ Code Refactoring
+
+- Update module to v4 ([762c735…](https://github.com/edgexfoundry/device-snmp-go/commit/762c73512d2a14d05ce12619d12e00b1cf9f67ac))
+```text
+
+BREAKING CHANGE: update go module to v4
+
+```
+
+### 👷 Build
+
+- Upgrade to go-1.23, Linter1.61.0 and Alpine 3.20 ([8b5f021…](https://github.com/edgexfoundry/device-snmp-go/commit/8b5f0216e1125e3879b1b2332f14b87fc9d24a4c))
 
 ## [v3.1.0] Napa - 2023-11-15 (Only compatible with the 3.x releases)
 
