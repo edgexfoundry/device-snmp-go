@@ -58,13 +58,7 @@ func (s *SNMPDriver) Start() error {
 
 // HandleReadCommands triggers a protocol Read operation for the specified device.
 func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]models.ProtocolProperties, reqs []dsModels.CommandRequest) (res []*dsModels.CommandValue, err error) {
-
-	res = make([]*dsModels.CommandValue, 0)
-
-	if len(reqs) != 1 {
-		err = fmt.Errorf("SimpleDriver.HandleReadCommands; too many command requests; only one supported")
-		return
-	}
+	res = make([]*dsModels.CommandValue, len(reqs))
 
 	var TCP = protocols[TcpProtocol]
 
@@ -74,20 +68,7 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 
 	//s.lc.Debug(fmt.Sprintf("SimpleDriver.HandleReadCommands: protocols: %v operation: %v attributes: %v", protocols, reqs[0].RO.Operation, reqs[0].DeviceResource.Attributes))
 
-	s.lc.Debug("Port %s", Port)
-	s.lc.Debug("Address", Address)
-
-	var commands []DeviceCommand
-	for _, req := range reqs {
-		oid, ok := req.Attributes["oid"].(string)
-		if !ok {
-			return nil, fmt.Errorf("oid attributes of %s must be string type", req.DeviceResourceName)
-		}
-		s.lc.Debugf("SNMPDriver.HandleReadCommand: device: %s operation: %v attributes: %v", Name, req.DeviceResourceName, req.Attributes)
-
-		commands = append(commands, NewGetDeviceCommand(oid))
-	}
-
+	s.lc.Debugf("Address:%s, Port:%s", Address, Port)
 	port, err := strconv.ParseUint(Port, 10, 64)
 	if err != nil {
 		s.lc.Errorf("SNMPDriver.HandleReadCommands; %s", err)
@@ -95,71 +76,84 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 	}
 
 	mu.Lock()
+	defer mu.Unlock()
 	if client == nil {
 		client = NewSNMPClient(Address, uint16(port))
 	}
+	var failedCount = 0
+	for i, req := range reqs {
+		commands := make([]DeviceCommand, 1)
+		oid, ok := req.Attributes["oid"].(string)
+		if !ok {
+			return nil, fmt.Errorf("oid attributes of %s must be string type", req.DeviceResourceName)
+		}
+		s.lc.Debugf("SNMPDriver.HandleReadCommand: device: %s operation: %v attributes: %v", Name, req.DeviceResourceName, req.Attributes)
 
-	// this can be any type either string or int at this point
-	vals, err := client.GetValues(commands)
-
-	mu.Unlock()
-
-	if err != nil {
-		s.lc.Errorf("SNMPDriver.HandleReadCommands; %s", err)
-		return
-	}
-
-	for i, val := range vals {
-		// switch here on type
-		//s.lc.Debug(fmt.Sprintf("SNMPDriver.HandleReadCommands; value of %v is: %d", reqs[i].RO, val))
-
-		switch safeVal := val.(type) {
-		case string:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeString, safeVal)
-			res = append(res, cv)
-		case int64:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeInt64, safeVal)
-			res = append(res, cv)
-		case int32:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeInt32, safeVal)
-			res = append(res, cv)
-		case int16:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeInt16, safeVal)
-			res = append(res, cv)
-		case int8:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeInt8, safeVal)
-			res = append(res, cv)
-		case uint64:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeUint64, safeVal)
-			res = append(res, cv)
-		case uint32:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeUint32, safeVal)
-			res = append(res, cv)
-		case uint16:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeUint16, safeVal)
-			res = append(res, cv)
-		case uint8:
-			cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeUint8, safeVal)
-			res = append(res, cv)
-		case uint:
-			trueVal, ok := val.(uint64) // Alt. non panicking version
-			if ok {
-				cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeUint64, trueVal)
-				res = append(res, cv)
-			} else {
-				s.lc.Errorf("SNMPDriver.HandleWriteCommands; %s", err)
-			}
-		default:
-			trueVal, ok := val.(int) // Alt. non panicking version
-			if ok {
-				cv, _ := dsModels.NewCommandValue(reqs[i].DeviceResourceName, common.ValueTypeInt32, int32(trueVal))
-				res = append(res, cv)
-			} else {
-				s.lc.Errorf("SNMPDriver.HandleWriteCommands; %s", err)
-			}
+		commands[0] = NewGetDeviceCommand(oid)
+		val, err := client.GetValues(commands)
+		if err != nil {
+			failedCount++
+			s.lc.Warnf("SNMPDriver.HandleReadCommands; err:%v", err)
+			res[i] = nil
+			continue
+		}
+		s.lc.Debugf("oid %v get value %v", oid, val)
+		res[i], err = s.switchType(req, val[0])
+		if err != nil {
+			failedCount++
+			s.lc.Warnf("switch type failed; err:%v", err)
+			res[i] = nil
+			continue
 		}
 	}
+	if failedCount == len(reqs) {
+		s.lc.Errorf("handleReadCommands: Handle read commandRequest %+v failed", reqs)
+		return res, fmt.Errorf("handleReadCommands: Handle read commandRequest %+v failed", reqs)
+	}
+	s.lc.Debugf("get result %+v", res)
+	return
+}
 
+func (s *SNMPDriver) switchType(req dsModels.CommandRequest, val interface{}) (result *dsModels.CommandValue, err error) {
+	// switch here on type
+	//s.lc.Debug(fmt.Sprintf("SNMPDriver.HandleReadCommands; value of %v is: %d", reqs[i].RO, val))
+	switch safeVal := val.(type) {
+	case string:
+		result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeString, safeVal)
+	case int64:
+		result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeInt64, safeVal)
+	case int32:
+		result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeInt32, safeVal)
+	case int16:
+		result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeInt16, safeVal)
+	case int8:
+		result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeInt8, safeVal)
+	case uint64:
+		result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeUint64, safeVal)
+	case uint32:
+		result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeUint32, safeVal)
+	case uint16:
+		result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeUint16, safeVal)
+	case uint8:
+		result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeUint8, safeVal)
+	case uint:
+		trueVal, ok := val.(uint64) // Alt. non panicking version
+		if ok {
+			result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeUint64, trueVal)
+		} else {
+			err = fmt.Errorf("cannot convert variable to uint64 type")
+		}
+	default:
+		trueVal, ok := val.(int) // Alt. non panicking version
+		if ok {
+			result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeInt32, int32(trueVal))
+		} else {
+			err = fmt.Errorf("cannot convert variable to int type")
+		}
+	}
+	if err != nil {
+		s.lc.Errorf("SNMPDriver.HandleReadCommands; err:%s; req:%+v", err, req)
+	}
 	return
 }
 
