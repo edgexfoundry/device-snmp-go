@@ -78,7 +78,7 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 	mu.Lock()
 	defer mu.Unlock()
 	if client == nil {
-		client = NewSNMPClient(Address, uint16(port))
+		client = NewSNMPClient(Address, uint16(port)) // #nosec G115
 	}
 	var failedCount = 0
 	for i, req := range reqs {
@@ -146,7 +146,7 @@ func (s *SNMPDriver) switchType(req dsModels.CommandRequest, val interface{}) (r
 	default:
 		trueVal, ok := val.(int) // Alt. non panicking version
 		if ok {
-			result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeInt32, int32(trueVal))
+			result, err = dsModels.NewCommandValue(req.DeviceResourceName, common.ValueTypeInt32, int32(trueVal)) // #nosec G115
 		} else {
 			err = fmt.Errorf("cannot convert variable to int type")
 		}

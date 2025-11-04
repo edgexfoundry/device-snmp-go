@@ -10,7 +10,7 @@ import (
 	"errors"
 	"fmt"
 
-	g "github.com/soniah/gosnmp"
+	g "github.com/gosnmp/gosnmp"
 )
 
 // SNMPClient represents the SNMP device is used for getting and setting SNMP device via OID
@@ -86,7 +86,7 @@ func (c *SNMPClient) GetValues(commands []DeviceCommand) ([]interface{}, error) 
 			results = append(results, string(variable.Value.(string)))
 		default:
 			var temp = g.ToBigInt(variable.Value).Uint64()
-			results = append(results, int(temp))
+			results = append(results, int(temp)) // #nosec G115
 		}
 	}
 	return results, nil
@@ -121,7 +121,7 @@ func (c *SNMPClient) SetValues(commands []DeviceCommand) ([]interface{}, error) 
 			return results, errors.New("Unknown operation: " + command.operation)
 		}
 		// TODO pass in logger
-		pdu := g.SnmpPDU{Name: command.operation, Type: g.Integer, Value: command.value, Logger: nil}
+		pdu := g.SnmpPDU{Name: command.operation, Type: g.Integer, Value: command.value}
 		pdus = append(pdus, pdu)
 	}
 
@@ -138,7 +138,7 @@ func (c *SNMPClient) SetValues(commands []DeviceCommand) ([]interface{}, error) 
 			results = append(results, string(octet))
 		default:
 			var temp = g.ToBigInt(variable.Value).Uint64()
-			results = append(results, int(temp))
+			results = append(results, int(temp)) // #nosec G115
 		}
 	}
 	return results, nil

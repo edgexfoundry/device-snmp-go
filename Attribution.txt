@@ -54,8 +54,8 @@ https://github.com/hashicorp/go-immutable-radix/blob/master/LICENSE
 hashicorp/golang-lru (Mozilla Public License 2.0) https://github.com/hashicorp/golang-lru
 https://github.com/hashicorp/golang-lru/blob/master/LICENSE
 
-soniah/gosnmp (unspecified) https://github.com/soniah/gosnmp
-https://github.com/soniah/gosnmp/blob/master/LICENSE
+gosnmp/gosnmp (BSD) https://github.com/gosnmp/gosnmp
+https://github.com/gosnmp/gosnmp/blob/master/LICENSE
 
 gopkg.in/yaml v2 (Apache 2.0) https://github.com/go-yaml/yaml/tree/v2
 https://github.com/go-yaml/yaml/blob/v2/LICENSE
@@ -440,3 +440,45 @@ https://github.com/zitadel/logging/blob/main/LICENSE
 
 github.com/zitadel/schema (BSD-3) https://github.com/zitadel/schema
 https://github.com/zitadel/schema/blob/main/LICENSE
+
+github.com/go-openapi/swag/cmdutils (Apache 2.0) https://github.com/go-openapi/swag/
+https://github.com/go-openapi/swag/blob/master/LICENSE
+
+github.com/go-openapi/swag/conv (Apache 2.0) https://github.com/go-openapi/swag/
+https://github.com/go-openapi/swag/blob/master/LICENSE
+
+github.com/go-openapi/swag/fileutils (Apache 2.0) https://github.com/go-openapi/swag/
+https://github.com/go-openapi/swag/blob/master/LICENSE
+
+github.com/go-openapi/swag/jsonname (Apache 2.0) https://github.com/go-openapi/swag/
+https://github.com/go-openapi/swag/blob/master/LICENSE
+
+github.com/go-openapi/swag/jsonutils (Apache 2.0) https://github.com/go-openapi/swag/
+https://github.com/go-openapi/swag/blob/master/LICENSE
+
+github.com/go-openapi/swag/loading (Apache 2.0) https://github.com/go-openapi/swag/
+https://github.com/go-openapi/swag/blob/master/LICENSE
+
+github.com/go-openapi/swag/mangling (Apache 2.0) https://github.com/go-openapi/swag/
+https://github.com/go-openapi/swag/blob/master/LICENSE
+
+github.com/go-openapi/swag/netutils (Apache 2.0) https://github.com/go-openapi/swag/
+https://github.com/go-openapi/swag/blob/master/LICENSE
+
+github.com/go-openapi/swag/stringutils (Apache 2.0) https://github.com/go-openapi/swag/
+https://github.com/go-openapi/swag/blob/master/LICENSE
+
+github.com/go-openapi/swag/typeutils (Apache 2.0) https://github.com/go-openapi/swag/
+https://github.com/go-openapi/swag/blob/master/LICENSE
+
+github.com/go-openapi/swag/yamlutils (Apache 2.0) https://github.com/go-openapi/swag/
+https://github.com/go-openapi/swag/blob/master/LICENSE
+
+github.com/go-viper/mapstructure/v2 (MIT) https://github.com/go-viper/mapstructure/
+https://github.com/go-viper/mapstructure/blob/main/LICENSE
+
+go.opentelemetry.io/auto/sdk (Apache 2.0) https://github.com/open-telemetry/opentelemetry-go-instrumentation
+https://github.com/open-telemetry/opentelemetry-go-instrumentation/blob/main/LICENSE
+
+go.yaml.in/yaml/v3 (Apache 2.0) https://github.com/yaml/go-yaml/tree/v3/
+https://github.com/yaml/go-yaml/blob/v3/LICENSE
