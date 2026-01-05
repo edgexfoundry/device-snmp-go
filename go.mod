@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/edgexfoundry/device-sdk-go/v4 v4.1.0-dev.51
 	github.com/edgexfoundry/go-mod-core-contracts/v4 v4.1.0-dev.25
-	github.com/gosnmp/gosnmp v1.42.1
+	github.com/gosnmp/gosnmp v1.43.0
 )
 
 require (
@@ -57,6 +57,7 @@ require (
 	github.com/go-resty/resty/v2 v2.16.5 // indirect
 	github.com/go-viper/mapstructure/v2 v2.4.0 // indirect
 	github.com/golang-jwt/jwt/v5 v5.3.0 // indirect
+	github.com/golang/mock v1.6.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/gorilla/securecookie v1.1.2 // indirect
