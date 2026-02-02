@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/edgexfoundry/device-sdk-go/v4 v4.1.0-dev.52
 	github.com/edgexfoundry/go-mod-core-contracts/v4 v4.1.0-dev.25
-	github.com/gosnmp/gosnmp v1.42.1
+	github.com/gosnmp/gosnmp v1.43.2
 )
 
 require (
@@ -123,7 +123,7 @@ require (
 	golang.org/x/net v0.48.0 // indirect
 	golang.org/x/oauth2 v0.31.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
-	golang.org/x/sys v0.39.0 // indirect
+	golang.org/x/sys v0.40.0 // indirect
 	golang.org/x/term v0.38.0 // indirect
 	golang.org/x/text v0.32.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
