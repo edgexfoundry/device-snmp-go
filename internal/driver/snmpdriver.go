@@ -69,7 +69,7 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 	//s.lc.Debug(fmt.Sprintf("SimpleDriver.HandleReadCommands: protocols: %v operation: %v attributes: %v", protocols, reqs[0].RO.Operation, reqs[0].DeviceResource.Attributes))
 
 	s.lc.Debugf("Address:%s, Port:%s", Address, Port)
-	port, err := strconv.ParseUint(Port, 10, 64)
+	port, err := strconv.ParseUint(Port, 10, 16)
 	if err != nil {
 		s.lc.Errorf("SNMPDriver.HandleReadCommands; %s", err)
 		return
@@ -78,7 +78,7 @@ func (s *SNMPDriver) HandleReadCommands(deviceName string, protocols map[string]
 	mu.Lock()
 	defer mu.Unlock()
 	if client == nil {
-		client = NewSNMPClient(Address, uint16(port)) // #nosec G115
+		client = NewSNMPClient(Address, uint16(port))
 	}
 	var failedCount = 0
 	for i, req := range reqs {
