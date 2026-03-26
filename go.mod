@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/edgexfoundry/device-sdk-go/v4 v4.1.0-dev.58
 	github.com/edgexfoundry/go-mod-core-contracts/v4 v4.1.0-dev.28
-	github.com/gosnmp/gosnmp v1.42.1
+	github.com/gosnmp/gosnmp v1.43.2
 )
 
 require (
