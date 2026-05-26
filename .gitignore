@@ -14,7 +14,6 @@ coverage.out
 *.log
 
 .idea/
-vendor/
 cmd/device-snmp
 glide.lock
 
