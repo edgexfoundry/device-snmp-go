@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/edgexfoundry/device-sdk-go/v4 v4.0.2
 	github.com/edgexfoundry/go-mod-core-contracts/v4 v4.0.3
-	github.com/gosnmp/gosnmp v1.44.0
+	github.com/gosnmp/gosnmp v1.45.0
 )
 
 require (
@@ -117,7 +117,7 @@ require (
 	go.opentelemetry.io/otel v1.41.0 // indirect
 	go.opentelemetry.io/otel/metric v1.41.0 // indirect
 	go.opentelemetry.io/otel/trace v1.41.0 // indirect
-	go.yaml.in/yaml/v3 v3.0.4 // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/crypto v0.51.0 // indirect
 	golang.org/x/net v0.55.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
